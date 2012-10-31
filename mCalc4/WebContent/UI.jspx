@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+			xmlns:c="http://java.sun.com/jsp/jstl/core"
+			version="2.0">
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1" 
+		pageEncoding="ISO-8859-1" session="true"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="res/mc.css" />
+
+<title>Mortgage Calculator</title>
+</head>
+<body>
+	<form action ='' method='post'> 	
+	<FIELDSET>
+	<LEGEND>Mortgage Calculator</LEGEND>
+		<c:if test="${not empty errorMessage}">
+		<p>Here is a error ${errorMessage}</p>	 	
+		</c:if>
+		<label for='principle'>Principle</label> 			
+		<input type ='text' id ='principle' name='principle' value='${principle}'/> 			
+		<BR/> 			
+		<label for='interest'>interest</label> 			
+		<input type ='text' name='interest' id='interest' value='${interest}'/> 			
+		<BR/> 		
+		<label for='amortization'>amortization</label> 	
+		<DIV class='radio'>
+		<c:if test="${param.amortization eq 20}">
+		<input type = 'radio' name='amortization' id ='amort20' value ='20' checked ='checked'/><label for='amort20'>20</label> 			
+		<input type = 'radio' name='amortization' id ='amort25' value ='25'  /><label for='amort25'>25</label> 		
+		<input type = 'radio' name='amortization' id ='amort30' value ='30'/><label for='amort30'>30</label> 
+		</c:if>
+		
+		<c:if test="${param.amortization eq 25}">
+		<input type = 'radio' name='amortization' id ='amort20' value ='20' /><label for='amort20'>20</label> 			
+		<input type = 'radio' name='amortization' id ='amort25' value ='25' checked ='checked' /><label for='amort25'>25</label> 		
+		<input type = 'radio' name='amortization' id ='amort30' value ='30'/><label for='amort30'>30</label> 			
+		</c:if>
+		
+		<c:if test="${param.amortization eq 30}">
+		<input type = 'radio' name='amortization' id ='amort20' value ='20' /><label for='amort20'>20</label> 			
+		<input type = 'radio' name='amortization' id ='amort25' value ='25' /><label for='amort25'>25</label> 		
+		<input type = 'radio' name='amortization' id ='amort30' value ='30' checked ='checked'/><label for='amort30'>30</label> 			
+		</c:if>
+				
+		<c:if test="${empty param.amortization}">	
+		<input type = 'radio' name='amortization' id ='amort20' value ='20' checked = 'checked'/><label for='amort20'>20</label> 			
+		<input type = 'radio' name='amortization' id ='amort25' value ='25' /><label for='amort25'>25</label> 		
+		<input type = 'radio' name='amortization' id ='amort30' value ='30' /><label for='amort30'>30</label> 				
+		</c:if>	
+		</DIV>
+		<BR/><input  type='submit' id ='doit' name='doit' value='Monthly Paymemt' /> 	
+				
+	</FIELDSET>	
+	</form> 
+</body>
+</html>
+</jsp:root>
