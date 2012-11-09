@@ -9,15 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Login, used for login 
+ * Servlet implementation class Express
  */
-public class Login extends HttpServlet {
+@WebServlet("/Express")
+public class Express extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public Express() {
         super();
     }
 
@@ -25,38 +26,36 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String login = request.getParameter("login");
+		String express = request.getParameter("express");
 		String target;
 		HttpSession session = request.getSession();
-		System.out.println("inlogin" + login);
-		if (login==null)
+		System.out.println("express" + express);
+		if (express==null)
 		{
-			target = "/login.jspx";
+			target = "/index.jspx";
 		}
 		else
 		{
-			if (login.equals("lgoin"))
-			{
-				//check db and login
-				System.out.println("login");
-				boolean loginOK = false;
-
-				//TODO check and set loginOk
-				session.setAttribute("login", loginOK);		
-			}
-			target = "/index.jspx";
-		}	
+				if (express.equals("Order"))
+				{
+					System.out.println("order");
+					target="/checkout.jspx";
+				}
+				else// cancel
+				{
+					target = "/index.jspx";
+				}
+				
+		}
 		request.getRequestDispatcher(target).forward(request, response);
 
-	}
+	}	
 		
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		doGet(request, response);
 	}
 

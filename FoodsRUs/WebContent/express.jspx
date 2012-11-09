@@ -12,12 +12,10 @@
 </head>
 <body>
 	<P>express page</P>
-	<form> 	
+	<form action="Express"> 	
 	<FIELDSET>
-	<input  type='submit' id ='doit' name='doit' value='login' /> 
-	<input  type='submit' id ='doit' name='doit' value='cart' /> 
-	<input  type='submit' id ='doit' name='doit' value='checkout' /> 
-	<input  type='submit' id ='doit' name='doit' value='express' /> 
+		<input  type='submit' id ='doit' name='express' value='Order' /> 
+		<input  type='submit' id ='doit' name='express' value='Cancel' /> 
 	</FIELDSET>	
 	</form>
 </body>

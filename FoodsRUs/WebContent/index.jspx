@@ -12,7 +12,7 @@
 </head>
 <body>
 	<P>index page</P>
-	<form> 	
+	<form action="FRU"> 	
 	<FIELDSET>
 	<input  type='submit' id ='doit' name='doit' value='login' /> 
 	<input  type='submit' id ='doit' name='doit' value='cart' /> 

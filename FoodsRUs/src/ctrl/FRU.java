@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class FRU
  */
-@WebServlet(urlPatterns = {""} )
+@WebServlet(urlPatterns = {"/","/Login"} )
 public class FRU extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -48,15 +48,15 @@ public class FRU extends HttpServlet {
 		}
 		else 
 		{
-			if (doit == "login")
+			if (doit.equals("login"))
 			{
 				target = "/login.jspx";
 			}
-			else if (doit == "cart")
+			else if (doit.equals("cart"))
 			{
 				target = "/cart.jspx";
 			}
-			else if (doit == "checkout")
+			else if (doit.equals("checkout"))
 			{
 				target = "/checkout.jspx";
 			}
@@ -64,6 +64,8 @@ public class FRU extends HttpServlet {
 			{
 				target = "/express.jspx";
 			}
+			System.out.println(doit);
+			
 		}
 		
 		
