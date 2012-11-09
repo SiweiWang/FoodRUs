@@ -20,12 +20,23 @@ public class FRUModel {
 	
 	/**
 	 * 
-	 * @return
+	 * @return the List of existing categories in the database.
 	 * @throws Exception
 	 */
 	public List<CategoryBean> retrieveCategory() throws Exception 
 	{
 		return this.dao.retrieveCategory();
+	}
+	
+	/**
+	 * 
+	 * @param catID
+	 * @return The list of items that belong to this category
+	 * @throws Exception
+	 */
+	public List<ItemBean> retrieveItems(int catID) throws Exception 
+	{
+		return this.dao.retrieveItems(catID);
 	}
 
 }

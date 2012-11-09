@@ -3,6 +3,7 @@ package model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,5 +53,40 @@ public class FoodRUDAO {
 		
 		return list;
 	}
+
+
+	/**
+	 * 
+	 * @param catID
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<ItemBean> retrieveItems(int catID) throws SQLException 
+	{
+		List<ItemBean> list = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = this.dataSource.getConnection();
+
+			String query = "Select SURNAME, GIVENNAME, GPA, MAJOR, COURSES from roumani.SIS where SURNAME like ? and GPA >= ?";
+			ps = con.prepareStatement(query);
+	//		ps.setString(1, namePrefix);
+	
+			ResultSet r = ps.executeQuery();
+			list = new ArrayList<ItemBean>();
+			while (r.next()) {
+//				ItemBean ib = new ItemBean(r.getString("SURNAME") + ", "
+//						+ r.getString("GIVENNAME"), r.getDouble("GPA"), r.getString("MAJOR"), r.getInt("COURSES"));
+	//			list.add(ib);
+			}
+		} finally {
+			if (con != null) con.close();
+			if (ps != null) ps.close();
+		}
+		return list;
+	}
+	
+	
 
 }
