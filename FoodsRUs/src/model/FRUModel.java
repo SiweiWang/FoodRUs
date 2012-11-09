@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  * 
  * @author derek
@@ -16,6 +18,14 @@ public class FRUModel {
 		this.dao = new FoodRUDAO();
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<CategoryBean> retrieveCategory() throws Exception 
+	{
+		return this.dao.retrieveCategory();
+	}
 
 }
