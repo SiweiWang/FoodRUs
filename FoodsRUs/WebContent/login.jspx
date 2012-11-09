@@ -8,16 +8,14 @@
 		omit-xml-declaration="true" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>FoodRUs</title>
+<title>Welcome to FoodRUs</title>
 </head>
 <body>
-	<P>index page</P>
-	<form> 	
+	<P>login page</P>
+	<form action="login"> 	
 	<FIELDSET>
-	<input  type='submit' id ='doit' name='doit' value='login' /> 
-	<input  type='submit' id ='doit' name='doit' value='cart' /> 
-	<input  type='submit' id ='doit' name='doit' value='checkout' /> 
-	<input  type='submit' id ='doit' name='doit' value='express' /> 
+	<input  type='submit' id ='doit' name='login' value='login' /> 
+	<input  type='submit' id ='doit' name='login' value='cancel' /> 
 	</FIELDSET>	
 	</form> 
 </body>
