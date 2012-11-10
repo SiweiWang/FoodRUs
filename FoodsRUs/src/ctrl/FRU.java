@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.*;
+
 /**
  * Servlet implementation class FRU
  */
-@WebServlet(urlPatterns = {""} )
+@WebServlet(urlPatterns = {"/","/Login"} )
 public class FRU extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -24,12 +26,22 @@ public class FRU extends HttpServlet {
         super();
     }
     
+    /**
+     * 
+     */
 	@Override
 	public void init() throws ServletException {
 		
 		super.init();
-		// TODO any model need to initialize goes here 
-		
+
+		//the singleton model need to be initialized here
+		FRUModel fru;
+		try {
+			fru = new FRUModel();
+			this.getServletContext().setAttribute("fru", fru);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,15 +60,15 @@ public class FRU extends HttpServlet {
 		}
 		else 
 		{
-			if (doit == "login")
+			if (doit.equals("login"))
 			{
 				target = "/login.jspx";
 			}
-			else if (doit == "cart")
+			else if (doit.equals("cart"))
 			{
 				target = "/cart.jspx";
 			}
-			else if (doit == "checkout")
+			else if (doit.equals("checkout"))
 			{
 				target = "/checkout.jspx";
 			}
@@ -64,6 +76,8 @@ public class FRU extends HttpServlet {
 			{
 				target = "/express.jspx";
 			}
+			System.out.println(doit);
+			
 		}
 		
 		

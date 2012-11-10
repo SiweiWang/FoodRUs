@@ -19,7 +19,7 @@
    			</a>
    			
 			<div id="headerRight">
-				<form>
+				<form action="FRU">
 					<div id="buttons">	
 						<input type='submit' id ='doit' name='doit' value='express'/>
 						<input type='submit' id ='doit' name='doit' value='checkout'/>

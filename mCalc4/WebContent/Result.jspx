@@ -17,7 +17,6 @@
 </head>
 <body>
 	<BR />
-	
 	<form action ="" method="post" onsubmit="return validate();">
 	<FIELDSET>
 	The monthly payment is : <f:formatNumber type="currency"> ${payment}</f:formatNumber> 

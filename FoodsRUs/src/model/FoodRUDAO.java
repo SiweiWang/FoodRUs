@@ -1,5 +1,13 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
@@ -7,10 +15,108 @@ public class FoodRUDAO {
 
 	private DataSource dataSource;
 	
+	/**
+	 * 
+	 * @throws Exception
+	 */
 	public FoodRUDAO() throws Exception
 	{
 		this.dataSource = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/CSE");
 	}
+	
+	
+	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<CategoryBean> retrieveCategory() throws SQLException 
+	{
+		List<CategoryBean> list = null;
+		Connection con = null;
+		Statement s = null;
+		try {
+			con = this.dataSource.getConnection();
+			s = con.createStatement();
+			String query = "Select * from roumani.category";
+			ResultSet r = s.executeQuery(query);
+			list = new ArrayList<CategoryBean>();
+			while (r.next()) 
+			{
+				CategoryBean cb = new CategoryBean(r.getInt("ID"), r.getString("NAME"), r.getString("DESCRIPTION"));
+				list.add(cb);
+			}
+		} finally {
+			if (con != null) con.close();
+			if (s != null) s.close();
+		}
+		
+		return list;
+	}
+
+
+	/**
+	 * 
+	 * @param catID
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<ItemBean> retrieveItems(int catID) throws SQLException 
+	{
+		List<ItemBean> list = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = this.dataSource.getConnection();
+
+			String query = "Select * from roumani.item where catid=?";
+			ps = con.prepareStatement(query);
+			ps.setInt(1, catID);
+	
+			ResultSet r = ps.executeQuery();
+			list = new ArrayList<ItemBean>();
+			while (r.next()) {
+				ItemBean ib = new ItemBean(r.getString("NUMBER"), r.getString("NAME"), r.getDouble("PRICE"), catID);
+				list.add(ib);
+			}
+		} finally {
+			if (con != null) con.close();
+			if (ps != null) ps.close();
+		}
+		return list;
+	}
+
+
+	/**
+	 * the method will be called by model class to retrieve a single item
+	 * @param itemNumber
+	 * @return the item identified by the unique item number
+	 * @throws SQLException
+	 */
+	public ItemBean retrieveItem(String itemNumber) throws SQLException 
+	{
+		ItemBean ib = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = this.dataSource.getConnection();
+
+			String query = "Select * from roumani.item where number=?";
+			ps = con.prepareStatement(query);
+			ps.setString(1, itemNumber);
+	
+			ResultSet r = ps.executeQuery();
+
+			while (r.next()) {
+				ib = new ItemBean(r.getString("NUMBER"), r.getString("NAME"), r.getDouble("PRICE"), r.getInt("CATID"));
+			}
+		} finally {
+			if (con != null) con.close();
+			if (ps != null) ps.close();
+		}
+		return ib;
+	}
+	
 	
 
 }
