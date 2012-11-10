@@ -26,7 +26,38 @@ public class CheckOut extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String checkout = request.getParameter("checkout");
+		String target;
+		if (checkout==null)
+		{
+			if (request.getSession(false) == null || !request.getSession().getAttribute("login").equals("login"))
+			{
+				target = "/login.jspx";
+				System.out.println("checkout -> login");
+			}
+			else
+			{
+				target="/checkout.jspx";
+				System.out.println("checkout -> checkout");
+
+			}
+		}
+		else
+		{
+			if (checkout.equals("checkout") )
+			{
+				//do check out 
+				target= "/confirm.jspx";
+				System.out.println("confirmed");
+			}
+			else
+			{
+				target = "/index/jspx";
+				System.out.println("continue shopping");
+
+			}
+		}
+		request.getRequestDispatcher(target).forward(request, response);			
 	}
 
 	/**
