@@ -15,7 +15,7 @@ import model.*;
 /**
  * Servlet implementation class FRU
  */
-@WebServlet(urlPatterns = {"", "/Login"} )
+@WebServlet(urlPatterns = {"/Start", "/Login"} )
 public class FRU extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -53,9 +53,18 @@ public class FRU extends HttpServlet {
 		
 		String target;
 		String doit = request.getParameter("doit");
+		FRUModel model = (FRUModel) this.getServletContext().getAttribute("fru"); 
 		if (doit == null)
 		{
 			//first time
+			try
+			{
+				request.setAttribute("categories", model.retrieveCategory());
+			} catch (Exception e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			target = "/index.jspx";
 		}
 		else 
