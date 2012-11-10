@@ -8,17 +8,45 @@
 		omit-xml-declaration="true" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>FoodRUs</title>
+<link rel="stylesheet" type="text/css" href="css/index.css"/>
+<title>FoodsRUs</title>
 </head>
 <body>
-	<form> 	
-	<FIELDSET>
-	<input  type='submit' id ='doit' name='doit' value='login' /> 
-	<input  type='submit' id ='doit' name='doit' value='cart' /> 
-	<input  type='submit' id ='doit' name='doit' value='checkout' /> 
-	<input  type='submit' id ='doit' name='doit' value='express' /> 
-	</FIELDSET>	
-	</form> 
+	<div id="main">
+		<div id="header">
+			<a href="#">
+       			<img src="#" id="logo" alt="FoodsRUs Logo"/>
+   			</a>
+   			
+			<div id="headerRight">
+				<form>
+					<div id="buttons">	
+						<input type='submit' id ='doit' name='doit' value='express'/>
+						<input type='submit' id ='doit' name='doit' value='checkout'/>
+						<input type='submit' id ='doit' name='doit' value='cart'/>
+						<input type='submit' id ='login' name='doit' value='login'/>
+					</div>
+					<div id="search">
+						<input type='submit' id ='doit' name='doit' value='search'/>
+						<input type='text' id ='searchText' name='search' value='search'/>
+					</div>
+				</form>
+				<img src="#" id="banner" alt="FoodsRUs Banner"/>
+			</div>
+		</div>
+		
+		<div id="leftColumn">
+			left column
+		</div>
+		
+		<div id="rightColumn">
+			right column
+		</div>
+		
+		<div id="footer">
+			footer
+		</div>
+	</div>
 </body>
 </html>
 </jsp:root>
