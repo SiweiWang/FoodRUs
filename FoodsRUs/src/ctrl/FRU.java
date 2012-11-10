@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.*;
+
 /**
  * Servlet implementation class FRU
  */
@@ -24,12 +26,22 @@ public class FRU extends HttpServlet {
         super();
     }
     
+    /**
+     * 
+     */
 	@Override
 	public void init() throws ServletException {
 		
 		super.init();
-		// TODO any model need to initialize goes here 
-		
+
+		//the singleton model need to be initialized here
+		FRUModel fru;
+		try {
+			fru = new FRUModel();
+			this.getServletContext().setAttribute("fru", fru);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

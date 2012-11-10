@@ -15,6 +15,7 @@ public class FRUModel {
 	
 	public FRUModel() throws Exception
 	{
+		
 		this.dao = new FoodRUDAO();
 	}
 	
@@ -37,6 +38,17 @@ public class FRUModel {
 	public List<ItemBean> retrieveItems(int catID) throws Exception 
 	{
 		return this.dao.retrieveItems(catID);
+	}
+	
+	/**
+	 * The method return a single item, can be used for express order by item number.
+	 * @param itemNumber
+	 * @return
+	 * @throws Exception
+	 */
+	public ItemBean retrieveItem(String itemNumber) throws Exception 
+	{
+		return this.dao.retrieveItem(itemNumber);
 	}
 
 }

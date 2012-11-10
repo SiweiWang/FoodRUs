@@ -30,7 +30,7 @@ public class FoodRUDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<CategoryBean> retrieveCategory() throws Exception 
+	public List<CategoryBean> retrieveCategory() throws SQLException 
 	{
 		List<CategoryBean> list = null;
 		Connection con = null;
@@ -69,22 +69,52 @@ public class FoodRUDAO {
 		try {
 			con = this.dataSource.getConnection();
 
-			String query = "Select SURNAME, GIVENNAME, GPA, MAJOR, COURSES from roumani.SIS where SURNAME like ? and GPA >= ?";
+			String query = "Select * from roumani.item where catid=?";
 			ps = con.prepareStatement(query);
-	//		ps.setString(1, namePrefix);
+			ps.setInt(1, catID);
 	
 			ResultSet r = ps.executeQuery();
 			list = new ArrayList<ItemBean>();
 			while (r.next()) {
-//				ItemBean ib = new ItemBean(r.getString("SURNAME") + ", "
-//						+ r.getString("GIVENNAME"), r.getDouble("GPA"), r.getString("MAJOR"), r.getInt("COURSES"));
-	//			list.add(ib);
+				ItemBean ib = new ItemBean(r.getString("NUMBER"), r.getString("NAME"), r.getDouble("PRICE"), catID);
+				list.add(ib);
 			}
 		} finally {
 			if (con != null) con.close();
 			if (ps != null) ps.close();
 		}
 		return list;
+	}
+
+
+	/**
+	 * the method will be called by model class to retrieve a single item
+	 * @param itemNumber
+	 * @return the item identified by the unique item number
+	 * @throws SQLException
+	 */
+	public ItemBean retrieveItem(String itemNumber) throws SQLException 
+	{
+		ItemBean ib = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = this.dataSource.getConnection();
+
+			String query = "Select * from roumani.item where number=?";
+			ps = con.prepareStatement(query);
+			ps.setString(1, itemNumber);
+	
+			ResultSet r = ps.executeQuery();
+
+			while (r.next()) {
+				ib = new ItemBean(r.getString("NUMBER"), r.getString("NAME"), r.getDouble("PRICE"), r.getInt("CATID"));
+			}
+		} finally {
+			if (con != null) con.close();
+			if (ps != null) ps.close();
+		}
+		return ib;
 	}
 	
 	
