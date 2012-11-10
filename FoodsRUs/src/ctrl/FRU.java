@@ -15,7 +15,7 @@ import model.*;
 /**
  * Servlet implementation class FRU
  */
-@WebServlet(urlPatterns = {"/","/Login"} )
+@WebServlet(urlPatterns = {"", "/Login"} )
 public class FRU extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
