@@ -17,7 +17,7 @@ version="2.0">
 <body>
 	<div id="main">
 		<div id="header">
-			<a href="#">
+			<a href="FRU">
        			<img src="#" id="logo" alt="FoodsRUs Logo"/>
    			</a>
    			
@@ -45,10 +45,10 @@ version="2.0">
 		<div id="rightColumn">
 			<c:forEach var="category" items="${categories}">
         		<div class="categoryBox">
-		            <a href="category?selectedCategory=${category.catID}">
-		                <span class="categoryLabel"></span>
-		                <span class="categoryLabelText">${category.name}</span>
-		                <img class="categoryImage" src="" alt="test"/>
+		            <a href="Category?selectedCategory=${category.name}">
+		                <img src="#" class="categoryImage" alt="categoryImage"/>
+		                <span class="categoryText">${category.name}</span>
+		                <br/>
 		            </a>
         		</div>
     		</c:forEach>

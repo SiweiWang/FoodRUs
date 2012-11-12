@@ -52,7 +52,7 @@ public class CheckOut extends HttpServlet {
 			}
 			else
 			{
-				target = "/index/jspx";
+				target = "/index.jspx";
 				System.out.println("continue shopping");
 
 			}
