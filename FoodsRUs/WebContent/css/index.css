@@ -67,7 +67,7 @@ body {
 
 #rightColumn {
 /*     height: 400px; */
-    width: 500px;
+    width: 650px;
     float: left;
     background: #eee;
 }
@@ -90,6 +90,27 @@ body {
 	padding-left: 0px;
 	padding: 1px;
     border:solid 1px #555;
+}
+
+#itemtable {
+	width: 650px;
+	border: 1em;
+	align: center;
+}
+
+#itemtable td
+{
+	border: 2px solid black;
+}
+
+#itemtable form{
+	width: 150px;
+	text-align: left;
+}
+
+.qtyInput {
+	width: 50px;
+	margin: 5px;
 }
 
 #footer {

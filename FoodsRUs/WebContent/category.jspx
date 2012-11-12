@@ -42,8 +42,7 @@
 				<c:forEach var="category" items="${categories}">
         		<span class="categoryBox">
 		            <a href="category?selectedCategory=${category.catID}">
-		                <span class="categoryLabel"></span>
-		                <span class="categoryLabelText">${category.name}</span>
+		                <div class="categoryLabelText">${category.name}</div>
 		                <img class="categoryImage" src="data:image/png;base64,${category.picture}" alt="test"/>
 		            </a>
         		</span>
@@ -51,17 +50,23 @@
 		</div>
 		
 		<div id="rightColumn">
-			<table border="1"  align="center">
-				<td>ItemNumber</td>
-				<td>ItmeName</td>
-				<td>ItmePrice</td>
-				<td>QTY</td>
+			<table id="itemtable">
+				<td>Number</td>
+				<td>Name</td>
+				<td>Price</td>
+				<td>Quantity</td>
 				<c:forEach var="item" items="${item}">
 	        		<tr>
 					<td>${item.itemNumber}</td>
 					<td>${item.itemName}</td>
 					<td>${item.price}</td>
-					<td></td>
+					<td>
+						<form action="FRU" method="post">
+							<input type="hidden" id="itemToAdd" name="itemToAdd" value="${item.itemNumber}"/>
+							<input class='qtyInput' type='text' id ='qtyToAdd' name='qtyToAdd' value=''/>
+							<input type='submit' id ='add' name='add' value='Add to cart'/>
+						</form> 
+					</td>
 					</tr>	
     			</c:forEach>
     		</table>
