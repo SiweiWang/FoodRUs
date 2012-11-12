@@ -120,6 +120,104 @@ public class FoodRUDAO {
 		return ib;
 	}
 	
+	/*this method will be used for search.java*/
+	public List<ItemBean> retrieveItemsPrice(String itemPrice) throws SQLException 
+	{
+		List<ItemBean> list = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = this.dataSource.getConnection();
+
+			String query = "Select * from roumani.item where PRICE like '" +
+					itemPrice +"%'" ;
+			ps = con.prepareStatement(query);
+	
+			ResultSet r = ps.executeQuery();
+			list = new ArrayList<ItemBean>();
+			while (r.next()) {
+				ItemBean ib = new ItemBean(
+						r.getString("NUMBER"),
+						r.getString("NAME"),
+						r.getDouble("PRICE"),
+						r.getInt("catID")
+						);
+				list.add(ib);				 
+			}
+		} finally {
+			if (con != null) con.close();
+			if (ps != null) ps.close();
+		}
+		return list;
+	}
+
+	
+	/*this method will be used for search.java*/
+	public List<ItemBean> retrieveItemsName(String itemName) throws SQLException 
+	{
+		List<ItemBean> list = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = this.dataSource.getConnection();
+
+			String query = "Select * from roumani.item where NAME like '%" +
+				itemName +"%'" ;
+			ps = con.prepareStatement(query);
+
+	
+			ResultSet r = ps.executeQuery();
+			list = new ArrayList<ItemBean>();
+			while (r.next()) {
+				ItemBean ib = new ItemBean(
+						r.getString("NUMBER"),
+						r.getString("NAME"),
+						r.getDouble("PRICE"),
+						r.getInt("catID")
+						);
+				list.add(ib);				 
+			}
+		} finally {
+			if (con != null) con.close();
+			if (ps != null) ps.close();
+		}
+		return list;
+	}
+
+	
+	
+	/*this method will be used for search.java*/
+	public List<ItemBean> retrieveItemsNumber(String itemNumber) throws SQLException 
+	{
+		List<ItemBean> list = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = this.dataSource.getConnection();
+
+			String query = "Select * from roumani.item where NUMBER like '%" +
+				itemNumber +"%'" ;
+			ps = con.prepareStatement(query);
+		
+	
+			ResultSet r = ps.executeQuery();
+			list = new ArrayList<ItemBean>();
+			while (r.next()) {
+				ItemBean ib = new ItemBean(
+						r.getString("NUMBER"),
+						r.getString("NAME"),
+						r.getDouble("PRICE"),
+						r.getInt("catID")
+						);
+				list.add(ib);				 
+			}
+		} finally {
+			if (con != null) con.close();
+			if (ps != null) ps.close();
+		}
+		return list;
+	}
+
 	/**
 	 * the method will validate client password
 	 * @param ClientID, password

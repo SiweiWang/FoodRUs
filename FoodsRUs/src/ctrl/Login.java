@@ -83,8 +83,8 @@ public class Login extends HttpServlet {
 			
 			else
 			{
-				
-				target = "/index.jspx";
+				System.out.println("check logout");	
+				target = "/index.jspx";		
 			}
 		}	
 		request.getRequestDispatcher(target).forward(request, response);

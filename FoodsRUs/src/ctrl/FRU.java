@@ -16,7 +16,7 @@ import model.*;
 /**
  * Servlet implementation class FRU
  */
-@WebServlet(urlPatterns = {"/Start","/category"} )
+@WebServlet(urlPatterns = {"/Start","/category","/FRU"} )
 public class FRU extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -105,7 +105,9 @@ public class FRU extends HttpServlet {
 			{
 				target = "/express.jspx";
 			}
-			
+			System.out.println(doit);
+			System.out.println(target);
+		
 		}
 		
 		RequestDispatcher rd= request.getRequestDispatcher(target);

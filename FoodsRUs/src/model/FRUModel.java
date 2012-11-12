@@ -1,10 +1,11 @@
 package model;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * 
- * @author derek
+ * @author
  *	FoodsRUs model class, use this class to coordinate operations between DAO, BEAN, and Controller.
  */
 
@@ -61,6 +62,58 @@ public class FRUModel {
 	{
 		return this.dao.validatePassword(ClientID, password);
 	}
+	
+	/**
+	 * The method add the item specified by itemNumber to the shoppingCart hashmap 
+	 * @param itmeNumber - the number (id) of the item
+	 * @throws Exception 
+	 */
+	public void addToCart(HashMap<String,ItemBean> shoppingCart, String itemNumber, int qty) throws Exception
+	{
+		if (shoppingCart.containsKey(itemNumber))
+		{
+			ItemBean item = shoppingCart.get(itemNumber);
+			item.setQty(item.getQty() + 1);
+		}else{
+			ItemBean item = this.retrieveItem(itemNumber);
+			item.setQty(qty);
+			shoppingCart.put(itemNumber, item);
+		}
+	}
+	
+	/**
+	 * Calculate total price of items in shopping cart
+	 * @param shoppingCart
+	 * @return - a double value of total price in shopping cart
+	 */
+	public double totalPrice(HashMap<String,ItemBean> shoppingCart)
+	{
+		
+		double totalPrice = 0;
+		for(ItemBean item: shoppingCart.values())
+		{
+			totalPrice += (item.getPrice() * item.getQty());
+		}
+		return totalPrice;
+	}
+	
+	/**
+	 * Update quantity of item in shoppingCart
+	 * @param shoppingCart
+	 * @param itemNumber
+	 * @param qty
+	 */
+	public void updateCart(HashMap<String,ItemBean> shoppingCart, String itemNumber, int qty)
+	{
+		if (qty == 0)//remove the item from shoppingCart
+		{
+			shoppingCart.remove(itemNumber);
+		}else //update qty
+		{
+			shoppingCart.get(itemNumber).setQty(qty);
+		}
+	}
+	
 	
 
 }
