@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class FRUModel {
 
 	//the FoodRUDAO Database access object to be instantiated. 
 	private FoodRUDAO dao;
-	
+    private List<ItemBean> list;
 	public FRUModel() throws Exception
 	{
 		
@@ -114,6 +115,22 @@ public class FRUModel {
 		}
 	}
 	
-	
+
+    public List<ItemBean> searchItemName(String name) throws SQLException
+    {
+	    list = dao.retrieveItemsName(name);
+	    return list;
+    }
+    
+    public List<ItemBean> searchItemPrice(String price) throws SQLException
+    {
+	    list = dao.retrieveItemsPrice(price);
+	    return list;
+    }
+    public List<ItemBean> searchItemNumber(String number) throws SQLException
+    {
+	    list = (List<ItemBean>) dao.retrieveItemsNumber(number);
+	    return list;
+    }
 
 }
