@@ -8,9 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.FRUModel;
+
 /**
  * Servlet implementation class Login, used for login 
  */
+@WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,24 +30,60 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
 		String target;
-		HttpSession session = request.getSession();
-		System.out.println("inlogin" + login);
+
 		if (login==null)
 		{
 			target = "/login.jspx";
 		}
 		else
 		{
-			if (login.equals("lgoin"))
+			if (login.equals("login"))
 			{
+				String clientID = request.getParameter("ClientID");
+				String password =request.getParameter("Password");
+				
 				//check db and login
-				System.out.println("login");
-				boolean loginOK = false;
+				FRUModel model = (FRUModel) this.getServletContext().getAttribute("fru"); 
+				
+				if(clientID!=null && password!=null)
+				{
+					try 
+					{
+						request.setAttribute("login", "n");	
 
-				//TODO check and set loginOk
-				session.setAttribute("login", loginOK);		
+						String ClientName = model.validatePassword(clientID, password);
+						if (! ClientName.equals("NotFound"))
+						{
+							request.setAttribute("login", "y");	
+							request.setAttribute("ClientName", ClientName);
+							target = "/index.jspx";
+						}
+						else
+						{
+							request.setAttribute("loginError", "Login credential is incorrect");
+							target = "/login.jspx";
+
+						}
+					} 
+					catch (Exception e) 
+					{
+						e.printStackTrace();
+						request.setAttribute("loginError", e.getMessage());
+						target = "/login.jspx";
+
+					}
+
+				}
+				else
+				{
+					request.setAttribute("loginError", "ClientID or Password can not be empty");
+					target = "/login.jspx";
+				}
 			}
-			target = "/index.jspx";
+			else
+			{
+				target = "/index.jspx";
+			}
 		}	
 		request.getRequestDispatcher(target).forward(request, response);
 

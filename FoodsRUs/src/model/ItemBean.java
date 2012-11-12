@@ -3,13 +3,15 @@
  */
 package model;
 
+import java.text.DecimalFormat;
+
 /**
  * @author 
  *
  */
 public class ItemBean {
 
-	
+	DecimalFormat twoDForm = new DecimalFormat("#.##");
 	private String itemNumber;
 	private String itemName;
 	private double price;
@@ -31,7 +33,7 @@ public class ItemBean {
 	{
 		this.itemNumber = itemNumber;
 		this.itemName = itemName;
-		this.price = price;
+		this.price = Double.valueOf(twoDForm.format(price));;
 		this.catID = catID;
 	}
 

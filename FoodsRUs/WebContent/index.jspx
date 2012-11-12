@@ -22,12 +22,20 @@ version="2.0">
    			</a>
    			
 			<div id="headerRight">
-				<form action="FRU">
+				<form action="">
 					<div id="buttons">	
 						<input type='submit' id ='doit' name='doit' value='express'/>
 						<input type='submit' id ='doit' name='doit' value='checkout'/>
 						<input type='submit' id ='doit' name='doit' value='cart'/>
-						<input type='submit' id ='login' name='doit' value='login'/>
+						<c:choose>
+							<c:when test="${login eq 'y'}">
+							<p>Welcome ${ClientName}</p>
+							<input type='submit' id ='login' name='doit' value='logout'/>	
+						</c:when>
+						<c:otherwise>
+							<input type='submit' id ='login' name='doit' value='login'/>
+						</c:otherwise>
+						</c:choose>
 					</div>
 					<div id="search">
 						<input type='submit' id ='doit' name='doit' value='search'/>
@@ -44,13 +52,13 @@ version="2.0">
 		
 		<div id="rightColumn">
 			<c:forEach var="category" items="${categories}">
-        		<div class="categoryBox">
-		            <a href="Category?selectedCategory=${category.name}">
-		                <img src="#" class="categoryImage" alt="categoryImage"/>
-		                <span class="categoryText">${category.name}</span>
-		                <br/>
+        		<span class="categoryBox">
+		            <a href="category?selectedCategory=${category.catID}">
+		                <span class="categoryLabel"></span>
+		                <span class="categoryLabelText">${category.name}</span>
+		                <img class="categoryImage" src="data:image/png;base64,${category.picture}" alt="test"/>
 		            </a>
-        		</div>
+        		</span>
     		</c:forEach>
 		</div>
 		

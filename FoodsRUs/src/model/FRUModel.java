@@ -50,5 +50,17 @@ public class FRUModel {
 	{
 		return this.dao.retrieveItem(itemNumber);
 	}
+	
+	/**
+	 * The method return a single item, can be used for express order by item number.
+	 * @param itemNumber
+	 * @return
+	 * @throws Exception
+	 */
+	public String validatePassword(String ClientID, String password) throws Exception 
+	{
+		return this.dao.validatePassword(ClientID, password);
+	}
+	
 
 }

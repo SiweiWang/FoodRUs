@@ -16,7 +16,7 @@ import model.*;
 /**
  * Servlet implementation class FRU
  */
-@WebServlet(urlPatterns = {"/Start", "/FRU", "/Login"} )
+@WebServlet(urlPatterns = {"/Start","/category"} )
 public class FRU extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -40,9 +40,11 @@ public class FRU extends HttpServlet {
 		try {
 			fru = new FRUModel();
 			this.getServletContext().setAttribute("fru", fru);
+			this.getServletContext().setAttribute("categories", fru.retrieveCategory());
+			this.getServletContext().setAttribute("categories", fru.retrieveCategory());
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}		
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -52,25 +54,33 @@ public class FRU extends HttpServlet {
 		// assume that index.html, we have four buttons , each called login , shopping cart, check out and express check out
 		// let the button call doit 
 		HttpSession session;
+		
 		String target;
 		String doit = request.getParameter("doit");
 		FRUModel model = (FRUModel) this.getServletContext().getAttribute("fru"); 
 		if (doit == null)
 		{
-			//first time
 			try
 			{
-				request.setAttribute("categories", model.retrieveCategory());
-			} catch (Exception e)
+				if(request.getParameter("selectedCategory")!= null)
+				{
+					request.setAttribute("item", model.retrieveItems(Integer.parseInt(request.getParameter("selectedCategory"))));
+					target = "/category.jspx";
+				}
+				else
+				{		
+					target = "/index.jspx";
+				}
+			} 
+			catch (Exception e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				target = "/exception.jspx";
 			}
-			target = "/index.jspx";
 		}
+		
 		else 
 		{
-			session = request.getSession(true);
 			if (doit.equals("login"))
 			{
 				target = "/login.jspx";
@@ -83,21 +93,23 @@ public class FRU extends HttpServlet {
 			{
 				target = "/checkout.jspx";
 			}
+			else if (doit.equals("search"))
+			{
+				target="/search.jspx";
+			}
 			else
 			{
 				target = "/express.jspx";
 			}
-			System.out.println(doit);
 			
 		}
-		
 		
 		RequestDispatcher rd= request.getRequestDispatcher(target);
 		rd.forward(request, response);
 		
 	}
 
-
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

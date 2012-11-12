@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-			xmlns:c="http://java.sun.com/jsp/jstl/core"
-		  	xmlns:f="http://java.sun.com/jsp/jstl/fmt"
-
-version="2.0">
-	<jsp:directive.page contentType="text/html; charset=ISO-8859-1" 
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
+		  xmlns:c="http://java.sun.com/jsp/jstl/core"
+		  xmlns:f="http://java.sun.com/jsp/jstl/fmt"
+		version="2.0">	
+<jsp:directive.page contentType="text/html; charset=ISO-8859-1" 
 		pageEncoding="ISO-8859-1" session="false"/>
 	<jsp:output doctype-root-element="html"
 		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -23,7 +22,7 @@ version="2.0">
    			</a>
    			
 			<div id="headerRight">
-				<form action="FRU">
+				<form action="">
 					<div id="buttons">	
 						<input type='submit' id ='doit' name='doit' value='express'/>
 						<input type='submit' id ='doit' name='doit' value='checkout'/>
@@ -40,11 +39,32 @@ version="2.0">
 		</div>
 		
 		<div id="leftColumn">
-			left column
+				<c:forEach var="category" items="${categories}">
+        		<span class="categoryBox">
+		            <a href="category?selectedCategory=${category.catID}">
+		                <span class="categoryLabel"></span>
+		                <span class="categoryLabelText">${category.name}</span>
+		                <img class="categoryImage" src="data:image/png;base64,${category.picture}" alt="test"/>
+		            </a>
+        		</span>
+    		</c:forEach>
 		</div>
 		
 		<div id="rightColumn">
-			<p>The selected category is: ${param.selectedCategory}</p>
+			<table border="1"  align="center">
+				<td>ItemNumber</td>
+				<td>ItmeName</td>
+				<td>ItmePrice</td>
+				<td>QTY</td>
+				<c:forEach var="item" items="${item}">
+	        		<tr>
+					<td>${item.itemNumber}</td>
+					<td>${item.itemName}</td>
+					<td>${item.price}</td>
+					<td></td>
+					</tr>	
+    			</c:forEach>
+    		</table>
 		</div>
 		
 		<div id="footer">
