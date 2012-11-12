@@ -16,7 +16,7 @@ import model.*;
 /**
  * Servlet implementation class FRU
  */
-@WebServlet(urlPatterns = {"/Start", "/Login"} )
+@WebServlet(urlPatterns = {"/Start", "/Login","/category"} )
 public class FRU extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -40,12 +40,10 @@ public class FRU extends HttpServlet {
 		try {
 			fru = new FRUModel();
 			this.getServletContext().setAttribute("fru", fru);
+			this.getServletContext().setAttribute("categories", fru.retrieveCategory());
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		// create data
-		
+		}		
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -62,15 +60,23 @@ public class FRU extends HttpServlet {
 		{
 			try
 			{
-				System.out.println("set catagoties in file");
-				request.setAttribute("categories", model.retrieveCategory());
-			} catch (Exception e)
+				if(request.getParameter("selectedCategory")!= null)
+				{
+					request.setAttribute("item", model.retrieveItems(Integer.parseInt(request.getParameter("selectedCategory"))));
+					target = "/category.jspx";
+				}
+				else
+				{		
+					target = "/index.jspx";
+				}
+			} 
+			catch (Exception e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				target = "/exception.jspx";
 			}
-			target = "/index.jspx";
 		}
+		
 		else 
 		{
 			if (doit.equals("login"))
@@ -101,7 +107,7 @@ public class FRU extends HttpServlet {
 		
 	}
 
-
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -80,9 +80,7 @@ public class FoodRUDAO {
 			list = new ArrayList<ItemBean>();
 			while (r.next()) {
 				ItemBean ib = new ItemBean(r.getString("NUMBER"), r.getString("NAME"), r.getDouble("PRICE"), catID);
-				list.add(ib);
-				System.out.println(r.getString("NUMBER") + " " + r.getString("NAME"));
-				 
+				list.add(ib);				 
 			}
 		} finally {
 			if (con != null) con.close();
