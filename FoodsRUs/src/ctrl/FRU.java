@@ -54,6 +54,7 @@ public class FRU extends HttpServlet {
 		// assume that index.html, we have four buttons , each called login , shopping cart, check out and express check out
 		// let the button call doit 
 		HttpSession session;
+		
 		String target;
 		String doit = request.getParameter("doit");
 		FRUModel model = (FRUModel) this.getServletContext().getAttribute("fru"); 

@@ -128,28 +128,24 @@ public class FoodRUDAO {
 	 */
 	public String validatePassword(String ClientID, String password) throws SQLException 
 	{
-		ItemBean ib = null;
 		Connection con = null;
 		PreparedStatement ps = null;
-		String ClientName = " ";
+		String ClientName = "NotFound";
 		try {
 			con = this.dataSource.getConnection();
 
 			String query = "Select * from roumani.client where number=?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, ClientID);
-	
 			ResultSet r = ps.executeQuery();
-		
-			
-			while (r.next()) 
+			if (r.next())
 			{
 				if (password.equals(r.getString("PASSWORD")))
 					{
 						ClientName = r.getString("NAME");
-					
 					}
 			}
+			
 		} finally {
 			if (con != null) con.close();
 			if (ps != null) ps.close();

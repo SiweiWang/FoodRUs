@@ -28,7 +28,7 @@ version="2.0">
 						<input type='submit' id ='doit' name='doit' value='checkout'/>
 						<input type='submit' id ='doit' name='doit' value='cart'/>
 						<c:choose>
-							<c:when test="${login eq 1}">
+							<c:when test="${login eq 'y'}">
 							<p>Welcome ${ClientName}</p>
 							<input type='submit' id ='login' name='doit' value='logout'/>	
 						</c:when>

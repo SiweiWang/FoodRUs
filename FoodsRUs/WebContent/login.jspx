@@ -30,6 +30,9 @@ version="2.0">
 		<form action='Login'> 	
 		<FIELDSET>
 		<legend>FoodsRUs customer login</legend>
+		<c:if test="${not empty loginError}">
+		<p>${loginError}</p>
+		</c:if>
 		<label for='ClientID'>ClientID</label> 			
 		<input type ='text' id ='ClientID' name='ClientID' value='${ClientID}'/>
 		<label for='Password'>Password</label> 			
