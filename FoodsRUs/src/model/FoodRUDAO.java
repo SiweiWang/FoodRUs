@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,9 +44,11 @@ public class FoodRUDAO {
 			list = new ArrayList<CategoryBean>();
 			while (r.next()) 
 			{
-				CategoryBean cb = new CategoryBean(r.getInt("ID"), r.getString("NAME"), r.getString("DESCRIPTION"));
+				Blob picture = r.getBlob("PICTURE");
+				CategoryBean cb = new CategoryBean(r.getInt("ID"), r.getString("NAME"), r.getString("DESCRIPTION"),	picture.getBytes(1,(int)picture.length() ));				
 				list.add(cb);
 			}
+			
 		} finally {
 			if (con != null) con.close();
 			if (s != null) s.close();
@@ -78,6 +81,8 @@ public class FoodRUDAO {
 			while (r.next()) {
 				ItemBean ib = new ItemBean(r.getString("NUMBER"), r.getString("NAME"), r.getDouble("PRICE"), catID);
 				list.add(ib);
+				System.out.println(r.getString("NUMBER") + " " + r.getString("NAME"));
+				 
 			}
 		} finally {
 			if (con != null) con.close();

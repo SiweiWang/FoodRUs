@@ -22,7 +22,7 @@ version="2.0">
    			</a>
    			
 			<div id="headerRight">
-				<form action="FRU">
+				<form action="">
 					<div id="buttons">	
 						<input type='submit' id ='doit' name='doit' value='express'/>
 						<input type='submit' id ='doit' name='doit' value='checkout'/>
@@ -44,13 +44,13 @@ version="2.0">
 		
 		<div id="rightColumn">
 			<c:forEach var="category" items="${categories}">
-        		<div class="categoryBox">
+        		<span class="categoryBox">
 		            <a href="category?selectedCategory=${category.catID}">
 		                <span class="categoryLabel"></span>
 		                <span class="categoryLabelText">${category.name}</span>
-		                <img class="categoryImage" src="" alt="test"/>
+		                <img class="categoryImage" src="data:image/png;base64,${category.picture}" alt="test"/>
 		            </a>
-        		</div>
+        		</span>
     		</c:forEach>
 		</div>
 		

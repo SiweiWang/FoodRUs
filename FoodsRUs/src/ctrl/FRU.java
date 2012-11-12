@@ -43,6 +43,9 @@ public class FRU extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		// create data
+		
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -57,9 +60,9 @@ public class FRU extends HttpServlet {
 		FRUModel model = (FRUModel) this.getServletContext().getAttribute("fru"); 
 		if (doit == null)
 		{
-			//first time
 			try
 			{
+				System.out.println("set catagoties in file");
 				request.setAttribute("categories", model.retrieveCategory());
 			} catch (Exception e)
 			{
@@ -70,7 +73,6 @@ public class FRU extends HttpServlet {
 		}
 		else 
 		{
-			session = request.getSession(true);
 			if (doit.equals("login"))
 			{
 				target = "/login.jspx";
@@ -83,14 +85,16 @@ public class FRU extends HttpServlet {
 			{
 				target = "/checkout.jspx";
 			}
+			else if (doit.equals("search"))
+			{
+				target="/search.jspx";
+			}
 			else
 			{
 				target = "/express.jspx";
 			}
-			System.out.println(doit);
 			
 		}
-		
 		
 		RequestDispatcher rd= request.getRequestDispatcher(target);
 		rd.forward(request, response);
