@@ -54,6 +54,8 @@ public class FRU extends HttpServlet {
 		// assume that index.html, we have four buttons , each called login , shopping cart, check out and express check out
 		// let the button call doit 
 		HttpSession session;
+		session = request.getSession();		
+
 		
 		String target;
 		String doit = request.getParameter("doit");
@@ -81,6 +83,8 @@ public class FRU extends HttpServlet {
 		
 		else 
 		{
+		
+			
 			if (doit.equals("login"))
 			{
 				target = "/login.jspx";
@@ -105,8 +109,7 @@ public class FRU extends HttpServlet {
 			{
 				target = "/express.jspx";
 			}
-			System.out.println(doit);
-			System.out.println(target);
+
 		
 		}
 		

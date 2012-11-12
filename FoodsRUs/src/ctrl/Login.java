@@ -30,7 +30,10 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
 		String target;
+		HttpSession session = request.getSession();
+		System.out.println(session.getId());
 
+		System.out.println("the value is session is :" +session.getAttribute("test") );
 		if (login==null)
 		{
 			target = "/login.jspx";
@@ -41,7 +44,9 @@ public class Login extends HttpServlet {
 			{
 				String clientID = request.getParameter("ClientID");
 				String password =request.getParameter("Password");
-				
+				request.setAttribute("ClientID", clientID);
+				request.setAttribute("Password", password);
+
 				//check db and login
 				FRUModel model = (FRUModel) this.getServletContext().getAttribute("fru"); 
 				
@@ -49,13 +54,15 @@ public class Login extends HttpServlet {
 				{
 					try 
 					{
-						request.setAttribute("login", "n");	
+						session.setAttribute("login", "n");	
 
 						String ClientName = model.validatePassword(clientID, password);
 						if (! ClientName.equals("NotFound"))
 						{
-							request.setAttribute("login", "y");	
-							request.setAttribute("ClientName", ClientName);
+							session.setAttribute("login", "y");	
+							session.setAttribute("ClientName", ClientName);
+							request.setAttribute("ClientName", session.getAttribute("ClientName"));
+							request.setAttribute("login", session.getAttribute("login"));
 							target = "/index.jspx";
 						}
 						else
@@ -83,10 +90,14 @@ public class Login extends HttpServlet {
 			
 			else
 			{
-				System.out.println("check logout");	
 				target = "/index.jspx";		
 			}
+			
 		}	
+		
+		
+		System.out.println("login : " + session.getAttribute("login"));
+		System.out.println("errorMsg : " + session.getAttribute("loginError"));
 		request.getRequestDispatcher(target).forward(request, response);
 
 	}
