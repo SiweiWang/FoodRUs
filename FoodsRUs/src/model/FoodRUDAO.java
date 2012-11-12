@@ -120,8 +120,8 @@ public class FoodRUDAO {
 		return ib;
 	}
 	
-	/*this method will return the ItemBean to search class*/
-	public List<ItemBean> retrieveItems() throws SQLException 
+	/*this method will be used for search.java*/
+	public List<ItemBean> retrieveItemsPrice(String itemPrice) throws SQLException 
 	{
 		List<ItemBean> list = null;
 		Connection con = null;
@@ -129,9 +129,9 @@ public class FoodRUDAO {
 		try {
 			con = this.dataSource.getConnection();
 
-			String query = "Select * from roumani.item";
+			String query = "Select * from roumani.item where price=?";
 			ps = con.prepareStatement(query);
-			
+			ps.setString(1, itemPrice);
 	
 			ResultSet r = ps.executeQuery();
 			list = new ArrayList<ItemBean>();
@@ -151,6 +151,37 @@ public class FoodRUDAO {
 		return list;
 	}
 
+	
+	/*this method will be used for search.java*/
+	public List<ItemBean> retrieveItemsName(String itemName) throws SQLException 
+	{
+		List<ItemBean> list = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = this.dataSource.getConnection();
+
+			String query = "Select * from roumani.item where price=?";
+			ps = con.prepareStatement(query);
+			ps.setString(1, itemName);
+	
+			ResultSet r = ps.executeQuery();
+			list = new ArrayList<ItemBean>();
+			while (r.next()) {
+				ItemBean ib = new ItemBean(
+						r.getString("NUMBER"),
+						r.getString("NAME"),
+						r.getDouble("PRICE"),
+						r.getInt("catID")
+						);
+				list.add(ib);				 
+			}
+		} finally {
+			if (con != null) con.close();
+			if (ps != null) ps.close();
+		}
+		return list;
+	}
 
 	
 	/**

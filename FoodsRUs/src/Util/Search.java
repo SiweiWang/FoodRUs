@@ -1,12 +1,22 @@
 package Util;
 
+import java.util.List;
+import model.FoodRUDAO;
+import model.ItemBean;
+
 public class Search
 {
-
-	public Search()
+    private FoodRUDAO fdao;
+    private List<ItemBean> list;
+	public Search() throws Exception
 	{
-		// TODO Auto-generated constructor stub
+		fdao = new FoodRUDAO();
+		list = fdao.retrieveItems();
+		
 	}
 
+public List<ItemBean> searchName(String n)
+{
+	
 }
-public List<>
+}
