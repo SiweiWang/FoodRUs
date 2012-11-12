@@ -68,7 +68,7 @@ public class FRUModel {
 	 * @param itmeNumber - the number (id) of the item
 	 * @throws Exception 
 	 */
-	public void addToCart(HashMap<String,ItemBean> shoppingCart, String itemNumber) throws Exception
+	public void addToCart(HashMap<String,ItemBean> shoppingCart, String itemNumber, int qty) throws Exception
 	{
 		if (shoppingCart.containsKey(itemNumber))
 		{
@@ -76,7 +76,7 @@ public class FRUModel {
 			item.setQty(item.getQty() + 1);
 		}else{
 			ItemBean item = this.retrieveItem(itemNumber);
-			item.setQty(1);
+			item.setQty(qty);
 			shoppingCart.put(itemNumber, item);
 		}
 	}
