@@ -16,7 +16,7 @@ import model.*;
 /**
  * Servlet implementation class FRU
  */
-@WebServlet(urlPatterns = {"/Start", "/Login","/category"} )
+@WebServlet(urlPatterns = {"/Start","/category"} )
 public class FRU extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -40,6 +40,7 @@ public class FRU extends HttpServlet {
 		try {
 			fru = new FRUModel();
 			this.getServletContext().setAttribute("fru", fru);
+			this.getServletContext().setAttribute("categories", fru.retrieveCategory());
 			this.getServletContext().setAttribute("categories", fru.retrieveCategory());
 		} catch (Exception e) {
 			e.printStackTrace();

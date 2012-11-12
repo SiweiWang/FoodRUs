@@ -8,9 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.FRUModel;
+
 /**
  * Servlet implementation class Login, used for login 
  */
+@WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,10 +28,13 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("IN outter login page");
 		String login = request.getParameter("login");
 		String target;
-		HttpSession session = request.getSession();
-		System.out.println("inlogin" + login);
+		System.out.println(login);
+
+		HttpSession session = request.getSession(true);
+
 		if (login==null)
 		{
 			target = "/login.jspx";
@@ -37,14 +43,34 @@ public class Login extends HttpServlet {
 		{
 			if (login.equals("lgoin"))
 			{
+				System.out.println("IN login page");
+				String clientID = request.getParameter("ClientID");
+				String password =request.getParameter("Password");
+				
+				System.out.println(clientID + " " + clientID);
 				//check db and login
-				System.out.println("login");
-				boolean loginOK = false;
+				FRUModel model = (FRUModel) this.getServletContext().getAttribute("fru"); 
+				
+				if(clientID!=null && password!=null)
+				{
+					try 
+					{
+						String ClientName = model.validatePassword(clientID, password);
+						if (! ClientName.equals(" "))
+						{
+							session.setAttribute("login", 1);	
+							session.setAttribute("clientID", ClientName);
+						}
+					} 
+					catch (Exception e) 
+					{
+						e.printStackTrace();
+						session.setAttribute("loginError", e.getMessage());
+					}
 
-				//TODO check and set loginOk
-				session.setAttribute("login", loginOK);		
+				}
 			}
-			target = "/index.jspx";
+			target = "/login.jspx";
 		}	
 		request.getRequestDispatcher(target).forward(request, response);
 

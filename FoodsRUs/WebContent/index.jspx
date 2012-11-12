@@ -27,7 +27,15 @@ version="2.0">
 						<input type='submit' id ='doit' name='doit' value='express'/>
 						<input type='submit' id ='doit' name='doit' value='checkout'/>
 						<input type='submit' id ='doit' name='doit' value='cart'/>
-						<input type='submit' id ='login' name='doit' value='login'/>
+						<c:choose>
+							<c:when test="${login eq 1}">
+							<p>Welcome ${ClientName}</p>
+							<input type='submit' id ='login' name='doit' value='logout'/>	
+						</c:when>
+						<c:otherwise>
+							<input type='submit' id ='login' name='doit' value='login'/>
+						</c:otherwise>
+						</c:choose>
 					</div>
 					<div id="search">
 						<input type='submit' id ='doit' name='doit' value='search'/>
