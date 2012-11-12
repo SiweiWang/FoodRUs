@@ -80,8 +80,10 @@ public class Login extends HttpServlet {
 					target = "/login.jspx";
 				}
 			}
+			
 			else
 			{
+				
 				target = "/index.jspx";
 			}
 		}	

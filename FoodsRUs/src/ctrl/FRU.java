@@ -97,6 +97,10 @@ public class FRU extends HttpServlet {
 			{
 				target="/search.jspx";
 			}
+			else if (doit.equals("logout"))
+			{
+				target = "/index.jspx";
+			}
 			else
 			{
 				target = "/express.jspx";
