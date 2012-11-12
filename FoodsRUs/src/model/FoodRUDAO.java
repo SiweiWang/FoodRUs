@@ -120,6 +120,39 @@ public class FoodRUDAO {
 		return ib;
 	}
 	
+	/*this method will return the ItemBean to search class*/
+	public List<ItemBean> retrieveItems() throws SQLException 
+	{
+		List<ItemBean> list = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = this.dataSource.getConnection();
+
+			String query = "Select * from roumani.item";
+			ps = con.prepareStatement(query);
+			
+	
+			ResultSet r = ps.executeQuery();
+			list = new ArrayList<ItemBean>();
+			while (r.next()) {
+				ItemBean ib = new ItemBean(
+						r.getString("NUMBER"),
+						r.getString("NAME"),
+						r.getDouble("PRICE"),
+						r.getInt("catID")
+						);
+				list.add(ib);				 
+			}
+		} finally {
+			if (con != null) con.close();
+			if (ps != null) ps.close();
+		}
+		return list;
+	}
+
+
+	
 	/**
 	 * the method will validate client password
 	 * @param ClientID, password
