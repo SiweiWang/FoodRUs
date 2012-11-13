@@ -9,5 +9,10 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/apache-tomcat-7.0.32/lib/servlet-api.jar" sourcepath="D:/apache-tomcat-7.0.32/webapps/docs/apache-tomcat-7.0.32-src.zip">
+		<attributes>
+			<attribute name="source_encoding" value="ISO-8859-1"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -2,6 +2,7 @@ package ctrl;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -103,7 +104,18 @@ public class FRU extends HttpServlet {
 				target = "/checkout.jspx";
 			}
 			else if (doit.equals("search"))
-			{
+			{   //search according the part of the item name.
+				String si = (String) request.getParameter("searchItem");
+		    	//System.out.println("the search value2 is: " + si);
+				try
+				{
+					List<ItemBean> ibl = model.searchItemName(si);
+					request.setAttribute("searchList", ibl);
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+
 				target="/search.jspx";
 			}
 			else if (doit.equals("logout"))
