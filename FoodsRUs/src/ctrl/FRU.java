@@ -106,11 +106,22 @@ public class FRU extends HttpServlet {
 			else if (doit.equals("search"))
 			{   //search according the part of the item name.
 				String si = (String) request.getParameter("searchItem");
-		    	//System.out.println("the search value2 is: " + si);
+				String regex1 = "[0-9]+[a-zA-Z]*[0-9]*";
+				
 				try
 				{
-					List<ItemBean> ibl = model.searchItemName(si);
-					request.setAttribute("searchList", ibl);
+					if(si.matches(regex1))
+					{
+					  List<ItemBean> ibl = model.searchItemNumber(si);
+					  request.setAttribute("searchList", ibl);
+					  System.out.println("inside if1 " + si );
+					  
+					}else
+					{
+					  List<ItemBean> ibl = model.searchItemName(si);
+					  request.setAttribute("searchList", ibl);
+					  System.out.println("inside else1");
+					}
 				} catch (SQLException e)
 				{
 					e.printStackTrace();
