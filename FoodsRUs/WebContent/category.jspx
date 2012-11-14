@@ -58,7 +58,7 @@
 				<c:forEach var="item" items="${item}">
 	        		<tr>
 					<td>${item.itemNumber}</td>
-					<td>${item.itemName}</td>
+					<td>${item.name}</td>
 					<td>${item.price}</td>
 					<td>
 						<form action="ShoppingCart" method="get">

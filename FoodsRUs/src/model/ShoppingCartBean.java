@@ -80,7 +80,7 @@ public class ShoppingCartBean {
 			this.shoppingCart.remove(itemNumber);
 		}else //update qty
 		{
-			this.shoppingCart.get(itemNumber).setQty(qty);
+			this.shoppingCart.get(itemNumber).setQuantity(qty);
 		}
 	}
 	
@@ -92,7 +92,7 @@ public class ShoppingCartBean {
 	public void incrementQty(String itemNumber, int qty)
 	{
 		ItemBean item = this.shoppingCart.get(itemNumber);
-		item.setQty(item.getQty() + qty);
+		item.setQuantity(item.getQuantity() + qty);
 	}
 	
 	
@@ -105,7 +105,7 @@ public class ShoppingCartBean {
 		double totalPrice = 0;
 		for(ItemBean item: this.shoppingCart.values())
 		{
-			totalPrice += (item.getPrice() * item.getQty());
+			totalPrice += (item.getPrice() * item.getQuantity());
 		}
 		this.setTotal(totalPrice);
 	}

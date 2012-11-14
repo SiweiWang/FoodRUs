@@ -1,6 +1,7 @@
 package ctrl;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.FRUModel;
 import model.ItemBean;
+import model.ShoppingCartBean;
 
 /**
  * Servlet implementation class ShoppingCart
@@ -35,24 +38,30 @@ public class ShoppingCart extends HttpServlet {
 		{
 			if (add.equals("AddToCart"))
 			{
-				/*
+				
 				ShoppingCartBean cart = (ShoppingCartBean)request.getSession().getAttribute("cart");
-				if (cat == null)
-				{
-					
-					//ShoppingCartBean cart = new ShoppingCartBean();
-					request.getSession().setAttribute("cart", cart);
+				if (cart == null)
+				{	
+					cart = new ShoppingCartBean();
 				}
-				
-				request.getParameter("itemToAdd");
-				request.getParameter("catID");
-				
-				*/
+				try 
+				{
+					FRUModel fru = (FRUModel) this.getServletContext().getAttribute("fru");
+
+					fru.addToCart(cart, request.getParameter("itemToAdd"),request.getParameter("qtyToAdd"));	
+					request.getSession().setAttribute("cart", cart);
+					request.setAttribute("cart",cart);
+				}
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+					response.sendError(500);
+				}
 				target ="/cart.jspx";
 			}
 			else
 			{
-				target ="/checkout.jspx";
+				target = "/index.jspx";
 			}
 		}
 		else

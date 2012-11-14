@@ -11,7 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import model.*;
 
@@ -75,10 +74,45 @@ public class FRU extends HttpServlet {
 					request.setAttribute("item",this.getServletContext().getAttribute(itemName));
 					target = "/category.jspx";
 				}
+				
+				else if (request.getParameter("add")!= null)
+				{	
+					String add = request.getParameter("add");
+					if (add.equals("AddToCart"))
+					{
+					
+						ShoppingCartBean cart = (ShoppingCartBean)request.getSession().getAttribute("cart");
+						if (cart == null)
+						{	
+							cart = new ShoppingCartBean();
+						}
+						
+						System.out.println("is cart null "  + cart == null);
+						try 
+						{
+							FRUModel fru = (FRUModel) this.getServletContext().getAttribute("fru");
+							fru.addToCart(cart, request.getParameter("itemToAdd"),request.getParameter("qtyToAdd"));	
+							
+							request.getSession().setAttribute("cart", cart);
+						}
+						catch (SQLException e)
+						{
+							e.printStackTrace();
+							response.sendError(500);
+						}
+						target ="/cart.jspx";
+					}
+					else
+					{
+						target ="/index.jspx";
+
+					}
+				}
 				else
 				{		
 					target = "/index.jspx";
 				}
+				
 			} 
 			catch (Exception e)
 			{
@@ -140,6 +174,7 @@ public class FRU extends HttpServlet {
 
 		
 		}
+		
 		
 		RequestDispatcher rd= request.getRequestDispatcher(target);
 		rd.forward(request, response);

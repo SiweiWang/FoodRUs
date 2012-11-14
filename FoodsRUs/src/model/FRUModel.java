@@ -54,9 +54,10 @@ public class FRUModel {
 	 * The method return a single item, can be used for express order by item number.
 	 * @param itemNumber
 	 * @return
+	 * @throws SQLException 
 	 * @throws Exception
 	 */
-	public ItemBean retrieveItem(String itemNumber) throws Exception 
+	public ItemBean retrieveItem(String itemNumber) throws SQLException 
 	{
 		return this.dao.retrieveItem(itemNumber);
 	}
@@ -111,18 +112,24 @@ public class FRUModel {
      * @param shoppingCart
      * @param itemNumber
      * @param qty
+     * @throws SQLException 
      * @throws Exception
      */
-    public void addToCart(ShoppingCartBean shoppingCart, String itemNumber, int qty) throws Exception
+    public void addToCart(ShoppingCartBean shoppingCart, String itemNumber, String qty) throws SQLException 
     {
+    	
+		System.out.println("is itemNumber in : " + shoppingCart.hasItem(itemNumber));
+
     	if(shoppingCart.hasItem(itemNumber))
     	{
-    		shoppingCart.incrementQty(itemNumber, qty);
-    	}else
+    		shoppingCart.incrementQty(itemNumber, Integer.parseInt(qty));
+    	}
+    	else
     	{
     		ItemBean item = this.retrieveItem(itemNumber);
-    		item.setQty(qty);
+    		item.setQuantity(Integer.parseInt(qty));
     		shoppingCart.add(item);
+    		System.out.println(shoppingCart.getItems().contains(item));
     	}
     }
     
