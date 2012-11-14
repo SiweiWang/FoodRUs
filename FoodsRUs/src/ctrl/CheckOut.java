@@ -6,6 +6,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBException;
+
+import Util.*;
+import model.ClientBean;
+import model.FRUModel;
+import model.ShoppingCartHelper;
 
 /**
  * Servlet implementation class CheckOut
@@ -47,6 +53,20 @@ public class CheckOut extends HttpServlet {
 			if (checkout.equals("checkout") )
 			{
 				//do check out 
+				
+				FRUModel model = (FRUModel)this.getServletContext().getAttribute("fru");
+				String filename = Constants.FOLDERTOEXPORT + request.getSession().getId()+ Constants.XMLEXTENSION;
+
+				try {
+					ShoppingCartHelper cart = (ShoppingCartHelper) request.getSession().getAttribute("cart");
+					model.checkOut(cart);
+					model.exportPO(this.getServletContext().getRealPath(filename), (Integer)this.getServletContext().getAttribute("id"), 
+							(ClientBean)this.getServletContext().getAttribute("client"), cart);
+				} catch (JAXBException e) {
+					e.printStackTrace();
+					response.sendError(500);
+				}
+				
 				target= "/confirm.jspx";
 				System.out.println("confirmed");
 			}

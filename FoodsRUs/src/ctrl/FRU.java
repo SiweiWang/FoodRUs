@@ -44,13 +44,17 @@ public class FRU extends HttpServlet {
 			List<CategoryBean> cat =  fru.retrieveCategory();
 			
 			this.getServletContext().setAttribute("fru", fru);
-			
+			// poke items
 			this.getServletContext().setAttribute("categories", cat);
 			for (CategoryBean c : cat )
 			{
 				String itemName = "item" + c.getCatID();
 				this.getServletContext().setAttribute(itemName,fru.retrieveItems(c.getCatID()));
 			}
+			//poke id
+			int id = 0;
+			this.getServletContext().setAttribute("id", id);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
@@ -176,6 +180,10 @@ public class FRU extends HttpServlet {
 		
 		}
 		
+		synchronized(this)
+		{
+			this.getServletContext().setAttribute("id", (Integer)getServletContext().getAttribute("id") +1);
+		}
 		
 		RequestDispatcher rd= request.getRequestDispatcher(target);
 		rd.forward(request, response);

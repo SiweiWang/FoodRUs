@@ -14,8 +14,12 @@ import javax.xml.bind.annotation.XmlType;
  * @author 
  *
  */
-@XmlType (propOrder={"itemNumber","name","price", "quantity","extended"})
 public class ItemBean {
+
+	public ItemBean() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	private final static DecimalFormat twoDForm = new DecimalFormat("#.##");
 	
