@@ -2,6 +2,8 @@ package ctrl;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,9 +41,16 @@ public class FRU extends HttpServlet {
 		FRUModel fru;
 		try {
 			fru = new FRUModel();
+			List<CategoryBean> cat =  fru.retrieveCategory();
+			
 			this.getServletContext().setAttribute("fru", fru);
-			this.getServletContext().setAttribute("categories", fru.retrieveCategory());
-			this.getServletContext().setAttribute("categories", fru.retrieveCategory());
+			
+			this.getServletContext().setAttribute("categories", cat);
+			for (CategoryBean c : cat )
+			{
+				String itemName = "item" + c.getCatID();
+				this.getServletContext().setAttribute(itemName,fru.retrieveItems(c.getCatID()));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
@@ -52,9 +61,7 @@ public class FRU extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// assume that index.html, we have four buttons , each called login , shopping cart, check out and express check out
-		// let the button call doit 
-		HttpSession session;
-		
+		// let the button call doit 	
 		String target;
 		String doit = request.getParameter("doit");
 		FRUModel model = (FRUModel) this.getServletContext().getAttribute("fru"); 
@@ -64,7 +71,8 @@ public class FRU extends HttpServlet {
 			{
 				if(request.getParameter("selectedCategory")!= null)
 				{
-					request.setAttribute("item", model.retrieveItems(Integer.parseInt(request.getParameter("selectedCategory"))));
+					String itemName = "item" + request.getParameter("selectedCategory");
+					request.setAttribute("item",this.getServletContext().getAttribute(itemName));
 					target = "/category.jspx";
 				}
 				else
@@ -81,6 +89,8 @@ public class FRU extends HttpServlet {
 		
 		else 
 		{
+		
+			
 			if (doit.equals("login"))
 			{
 				target = "/login.jspx";
@@ -94,7 +104,29 @@ public class FRU extends HttpServlet {
 				target = "/checkout.jspx";
 			}
 			else if (doit.equals("search"))
-			{
+			{   //search according the part of the item name.
+				String si = (String) request.getParameter("searchItem");
+				String regex1 = "[0-9]+[a-zA-Z]*[0-9]*";
+				
+				try
+				{
+					if(si.matches(regex1))
+					{
+					  List<ItemBean> ibl = model.searchItemNumber(si);
+					  request.setAttribute("searchList", ibl);
+					  System.out.println("inside if1 " + si );
+					  
+					}else
+					{
+					  List<ItemBean> ibl = model.searchItemName(si);
+					  request.setAttribute("searchList", ibl);
+					  System.out.println("inside else1");
+					}
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+
 				target="/search.jspx";
 			}
 			else if (doit.equals("logout"))
@@ -105,8 +137,7 @@ public class FRU extends HttpServlet {
 			{
 				target = "/express.jspx";
 			}
-			System.out.println(doit);
-			System.out.println(target);
+
 		
 		}
 		

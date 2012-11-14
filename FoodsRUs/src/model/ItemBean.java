@@ -5,6 +5,9 @@ package model;
 
 import java.text.DecimalFormat;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+
 /**
  * @author 
  *
@@ -12,12 +15,24 @@ import java.text.DecimalFormat;
 public class ItemBean {
 
 	DecimalFormat twoDForm = new DecimalFormat("#.##");
+	
+	@XmlAttribute(name="number")
 	private String itemNumber;
-	private String itemName;
+	
+	@XmlElement
+	private String name;
+	
+	@XmlElement
 	private double price;
+	
+	@XmlElement
+	private int quantity;
+	
+	@XmlElement
+	private double extended;
+	
 	//Category ID;
 	private int catID;
-	private int qty;
 	private int onOrder;
 	private int reOrder;
 	private double cost;
@@ -32,7 +47,7 @@ public class ItemBean {
 	public ItemBean(String itemNumber, String itemName, double price, int catID) 
 	{
 		this.itemNumber = itemNumber;
-		this.itemName = itemName;
+		this.name = itemName;
 		this.price = Double.valueOf(twoDForm.format(price));;
 		this.catID = catID;
 	}
@@ -55,14 +70,14 @@ public class ItemBean {
 	 * @return the itemName
 	 */
 	public String getItemName() {
-		return itemName;
+		return name;
 	}
 
 	/**
 	 * @param itemName the itemName to set
 	 */
 	public void setItemName(String itemName) {
-		this.itemName = itemName;
+		this.name = itemName;
 	}
 
 	/**
@@ -97,14 +112,15 @@ public class ItemBean {
 	 * @return the qty
 	 */
 	public int getQty() {
-		return qty;
+		return quantity;
 	}
 
 	/**
 	 * @param qty the qty to set
 	 */
 	public void setQty(int qty) {
-		this.qty = qty;
+		this.quantity = qty;
+		this.setExtended(this.price * this.quantity);
 	}
 
 	/**
@@ -163,6 +179,19 @@ public class ItemBean {
 		this.supID = supID;
 	}
 	
-	
+	/**
+	 * @return the extended
+	 */
+	public double getExtended() {
+		return extended;
+	}
+
+	/**
+	 * @param extended the extended to set
+	 */
+	private void setExtended(double extended) {
+		this.extended = extended;
+	}
+
 
 }

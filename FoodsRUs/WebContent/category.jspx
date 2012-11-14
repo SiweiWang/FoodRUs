@@ -61,10 +61,10 @@
 					<td>${item.itemName}</td>
 					<td>${item.price}</td>
 					<td>
-						<form action="FRU" method="post">
+						<form action="ShoppingCart" method="get">
 							<input type="hidden" id="itemToAdd" name="itemToAdd" value="${item.itemNumber}"/>
 							<input class='qtyInput' type='text' id ='qtyToAdd' name='qtyToAdd' value=''/>
-							<input type='submit' id ='add' name='add' value='Add to cart'/>
+							<input type='submit' id ='add' name='add' value='AddToCart'/>
 						</form> 
 					</td>
 					</tr>	

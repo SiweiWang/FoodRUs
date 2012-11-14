@@ -1,7 +1,16 @@
 package model;
 
-import java.util.HashMap;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.transform.stream.StreamResult;
 
 /**
  * 
@@ -13,7 +22,7 @@ public class FRUModel {
 
 	//the FoodRUDAO Database access object to be instantiated. 
 	private FoodRUDAO dao;
-	
+    private List<ItemBean> list;
 	public FRUModel() throws Exception
 	{
 		
@@ -63,57 +72,116 @@ public class FRUModel {
 		return this.dao.validatePassword(ClientID, password);
 	}
 	
-	/**
-	 * The method add the item specified by itemNumber to the shoppingCart hashmap 
-	 * @param itmeNumber - the number (id) of the item
-	 * @throws Exception 
-	 */
-	public void addToCart(HashMap<String,ItemBean> shoppingCart, String itemNumber, int qty) throws Exception
-	{
-		if (shoppingCart.containsKey(itemNumber))
-		{
-			ItemBean item = shoppingCart.get(itemNumber);
-			item.setQty(item.getQty() + 1);
-		}else{
-			ItemBean item = this.retrieveItem(itemNumber);
-			item.setQty(qty);
-			shoppingCart.put(itemNumber, item);
-		}
-	}
 	
 	/**
-	 * Calculate total price of items in shopping cart
-	 * @param shoppingCart
-	 * @return - a double value of total price in shopping cart
+	 * 
+	 * @param name
+	 * @return
+	 * @throws SQLException
 	 */
-	public double totalPrice(HashMap<String,ItemBean> shoppingCart)
-	{
+    public List<ItemBean> searchItemName(String name) throws SQLException
+    {
+	    list = dao.retrieveItemsName(name);
+	    return list;
+    }
+    
+    /**
+     * 
+     */
+    public List<ItemBean> searchItemPrice(String price) throws SQLException
+    {
+	    list = dao.retrieveItemsPrice(price);
+	    return list;
+    }
+    
+    /**
+     * 
+     * @param number
+     * @return
+     * @throws SQLException
+     */
+    public List<ItemBean> searchItemNumber(String number) throws SQLException
+    {
+	    list = (List<ItemBean>) dao.retrieveItemsNumber(number);
+	    return list;
+    }
+    
+    /**
+     * Add item, specified by itemNumber, and quantity to shopping cart.
+     * @param shoppingCart
+     * @param itemNumber
+     * @param qty
+     * @throws Exception
+     */
+    public void addToCart(ShoppingCartBean shoppingCart, String itemNumber, int qty) throws Exception
+    {
+    	if(shoppingCart.hasItem(itemNumber))
+    	{
+    		shoppingCart.incrementQty(itemNumber, qty);
+    	}else
+    	{
+    		ItemBean item = this.retrieveItem(itemNumber);
+    		item.setQty(qty);
+    		shoppingCart.add(item);
+    	}
+    }
+    
+    /**
+     * update shopping with specified the qty for a particular item in cart.
+     * @param shoppingCart
+     * @param itemNumber
+     * @param qty
+     */
+    public void updateCart(ShoppingCartBean shoppingCart, String itemNumber, int qty)
+    {
+    	//do we need to check the existence of the item(in cart)?
+    	
+    	shoppingCart.updateQty(itemNumber, qty);
+    }
+    
+    /**
+     * 
+     * @param shoppingCart
+     */
+    public void checkOut(ShoppingCartBean shoppingCart)
+    {
+    	//more to be added, not sure how controller will use it.
+    	
+    	// to update total price, shipping, HST etc.
+    	shoppingCart.checkOutUpdate();
+    }
+    
+    /**
+     * the checkOut method must be called before calling this method
+     * @param shoppingCart
+     * @param totalOrderPerUser
+     * @param totalOrders
+     * @throws JAXBException 
+     * @throws IOException 
+     */
+    public void exportPO(String filename, int id, ClientBean customer, ShoppingCartBean shoppingCart) throws JAXBException, IOException
+    {
+    		
+		JAXBContext jc = JAXBContext.newInstance(OrderWrapper.class);
+
+		OrderWrapper ow = new OrderWrapper(id, new Date(), customer, shoppingCart);
+		Marshaller marshaller = jc.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+
+		StringWriter sw = new StringWriter();
 		
-		double totalPrice = 0;
-		for(ItemBean item: shoppingCart.values())
-		{
-			totalPrice += (item.getPrice() * item.getQty());
-		}
-		return totalPrice;
-	}
-	
-	/**
-	 * Update quantity of item in shoppingCart
-	 * @param shoppingCart
-	 * @param itemNumber
-	 * @param qty
-	 */
-	public void updateCart(HashMap<String,ItemBean> shoppingCart, String itemNumber, int qty)
-	{
-		if (qty == 0)//remove the item from shoppingCart
-		{
-			shoppingCart.remove(itemNumber);
-		}else //update qty
-		{
-			shoppingCart.get(itemNumber).setQty(qty);
-		}
-	}
-	
-	
+		sw.write("<?xml version='1.0'?>\n");
+		
+		sw.write("<?xml-stylesheet type='text/xsl' href='SIS.xsl'?>\n");
+		marshaller.marshal(ow, new StreamResult(sw));
+
+		System.out.println(sw.toString());
+		System.out.println(filename);
+		FileWriter fw = new FileWriter(filename);
+		fw.write(sw.toString());
+		fw.close();
+    }
+    
 
 }
