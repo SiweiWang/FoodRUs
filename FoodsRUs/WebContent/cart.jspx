@@ -16,14 +16,8 @@ version="2.0">
 </head>
 <body>
 	<div id="main">
-		<div id="header">
-			<a href="FRU">
-       			<img src="#" id="logo" alt="FoodsRUs Logo"/>
-   			</a>
-   			
-		<div id="headerRight">
-		<p>headerRight</p>
-		</div>
+		
+		<jsp:include page="header.jspx"/>
 		
 		<div id="leftColumn">
 		<p>leftColumn</p>
@@ -41,10 +35,7 @@ version="2.0">
         	</c:forEach>
 		</div>
 			
-		<div id="footer">
-			footer
-		</div>
-		</div>
+		<jsp:include page="footer.jspx"/>
 	</div>
 </body>
 </html>

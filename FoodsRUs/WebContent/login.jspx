@@ -15,34 +15,26 @@ version="2.0">
 <title>FoodsRUs</title>
 </head>
 <body>
-	<div id="main">
-		<div id="header">
-			<a href="FRU">
-       			<img src="#" id="logo" alt="FoodsRUs Logo"/>
-   			</a>
-			<div id="headerRight">
-				<img src="#" id="banner" alt="FoodsRUs Banner"/>
-			</div>
-		</div>
+		<jsp:include page="header.jspx"/>
+			<form action='Login'> 	
+				<fieldset>
+					<legend>FoodsRUs customer login</legend>
+						<c:if test="${not empty loginError}">
+							<p>${loginError}</p>
+						</c:if>
+						<label for='ClientID'>ClientID</label> 			
+						<input type ='text' id ='ClientID' name='ClientID' value='${ClientID}'/>
+						
+						<label for='Password'>Password</label> 			
+						<input type ='text' id ='Password' name='Password' value='${Password}'/>
+						
+						<input type='submit' id ='login' name='login' value='login'/>
+						<input type='submit' id ='login' name='login' value='cancel'/>
+				</fieldset>	
+			</form>
+			
+		<jsp:include page="footer.jspx"/>
 		
-		<form action='Login'> 	
-		<FIELDSET>
-		<legend>FoodsRUs customer login</legend>
-		<c:if test="${not empty loginError}">
-		<p>${loginError}</p>
-		</c:if>
-		<label for='ClientID'>ClientID</label> 			
-		<input type ='text' id ='ClientID' name='ClientID' value='${ClientID}'/>
-		<label for='Password'>Password</label> 			
-		<input type ='text' id ='Password' name='Password' value='${Password}'/>
-		<input type='submit' id ='login' name='login' value='login'/>
-		<input type='submit' id ='login' name='login' value='cancel'/>
-		</FIELDSET>	
-		</form>
-		
-		<div id="footer">
-			footer
-		</div>
 	</div>
 </body>
 </html>
