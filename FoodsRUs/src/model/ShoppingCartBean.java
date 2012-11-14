@@ -51,6 +51,7 @@ public class ShoppingCartBean {
 	public ShoppingCartBean()
 	{
 		this.shoppingCart = new HashMap<String, ItemBean>();
+		this.items = this.shoppingCart.values();
 	}
 	
 	
@@ -147,7 +148,6 @@ public class ShoppingCartBean {
 	public void checkOutUpdate()
 	{
 		this.calculateGrandTotal();
-		this.items = this.shoppingCart.values();
 	}
 
 	/**
