@@ -42,7 +42,7 @@
 					<td>${item.name}</td>
 					<td>${item.price}</td>
 					<td>
-						<form action="ShoppingCart" method="get">
+						<form action="ShoppingCart" method="POST">
 							<input type="hidden" id="itemToAdd" name="itemToAdd" value="${item.itemNumber}"/>
 							<input class='qtyInput' type='text' id ='qtyToAdd' name='qtyToAdd' value='0'/>
 							<input type='submit' id ='add' name='add' value='AddToCart'/>
