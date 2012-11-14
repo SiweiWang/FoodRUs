@@ -3,6 +3,10 @@
  */
 package model;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  * @author 
  *
@@ -31,7 +35,7 @@ public class ClientBean {
 		this.rating = rating;
 	}
 
-
+	@XmlAttribute(name="account")
 	public int getClientNumber() {
 		return clientNumber;
 	}
@@ -40,6 +44,7 @@ public class ClientBean {
 		this.clientNumber = clientNumber;
 	}
 
+	@XmlElement(name="name")
 	public String getClientName() {
 		return clientName;
 	}
@@ -48,6 +53,7 @@ public class ClientBean {
 		this.clientName = clientName;
 	}
 
+	@XmlTransient
 	public String getPassword() {
 		return password;
 	}
@@ -56,9 +62,11 @@ public class ClientBean {
 		this.password = password;
 	}
 
+	@XmlTransient
 	public String getRating() {
 		return rating;
 	}
+
 
 	public void setRating(String rating) {
 		this.rating = rating;
