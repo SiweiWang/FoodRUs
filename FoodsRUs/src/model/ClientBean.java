@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author 
  *
  */
-public class ClientBean {
+public class ClientBean{
 
 	private int clientNumber;
 	private String clientName;

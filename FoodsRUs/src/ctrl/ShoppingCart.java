@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.FRUModel;
 import model.ItemBean;
@@ -34,12 +35,13 @@ public class ShoppingCart extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String add = request.getParameter("add");
 		String target ;
+		HttpSession session = request.getSession();
 		if (add != null)
 		{
 			if (add.equals("AddToCart"))
 			{
 				
-				ShoppingCartHelper cart = (ShoppingCartHelper)request.getSession().getAttribute("cart");
+				ShoppingCartHelper cart = (ShoppingCartHelper)session.getAttribute("cart");
 				if (cart == null)
 				{	
 					cart = new ShoppingCartHelper();
@@ -49,7 +51,7 @@ public class ShoppingCart extends HttpServlet {
 					FRUModel fru = (FRUModel) this.getServletContext().getAttribute("fru");
 
 					fru.addToCart(cart, request.getParameter("itemToAdd"),request.getParameter("qtyToAdd"));	
-					request.getSession().setAttribute("cart", cart);
+					session.setAttribute("cart", cart);
 					request.setAttribute("cart",cart);
 				}
 				catch (SQLException e)
