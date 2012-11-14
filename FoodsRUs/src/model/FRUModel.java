@@ -68,7 +68,7 @@ public class FRUModel {
 	 * @return
 	 * @throws Exception
 	 */
-	public String validatePassword(String ClientID, String password) throws Exception 
+	public ClientBean validatePassword(String ClientID, String password) throws Exception 
 	{
 		return this.dao.validatePassword(ClientID, password);
 	}

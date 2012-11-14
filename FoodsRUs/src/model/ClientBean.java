@@ -7,7 +7,7 @@ package model;
  * @author 
  *
  */
-public class ClientBean {
+public class ClientBean{
 
 	private int clientNumber;
 	private String clientName;
