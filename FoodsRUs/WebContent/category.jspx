@@ -44,7 +44,7 @@
 					<td>
 						<form action="ShoppingCart" method="get">
 							<input type="hidden" id="itemToAdd" name="itemToAdd" value="${item.itemNumber}"/>
-							<input class='qtyInput' type='text' id ='qtyToAdd' name='qtyToAdd' value=''/>
+							<input class='qtyInput' type='text' id ='qtyToAdd' name='qtyToAdd' value='0'/>
 							<input type='submit' id ='add' name='add' value='AddToCart'/>
 						</form> 
 					</td>

@@ -24,7 +24,7 @@ version="2.0">
 		</div>
 		
 		<div id="rightColumn">
-			<c:forEach var="item" items="${cart.items}">
+			<c:forEach var="item" items="${sessionScope.cart.items}">
         		<span class="categoryBox">
 		                <div class="categoryLabelText">${item.itemNumber}</div>
 		                <div class="categoryLabelText">${item.name}</div>
