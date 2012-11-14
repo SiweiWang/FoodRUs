@@ -20,20 +20,29 @@
 			<a href="FRU">
        			<img src="#" id="logo" alt="FoodsRUs Logo"/>
    			</a>
-   			
 			<div id="headerRight">
-				<form action="FRU">
-					<div id="buttons">	
+					<div id="buttons">
+					<form action="FRU">	
 						<input type='submit' id ='doit' name='doit' value='express'/>
 						<input type='submit' id ='doit' name='doit' value='checkout'/>
 						<input type='submit' id ='doit' name='doit' value='cart'/>
-						<input type='submit' id ='login' name='doit' value='login'/>
+						<c:choose>
+							<c:when test="${login eq 'y'}">
+							<p>Welcome ${ClientName}</p>
+							<input type='submit' id ='login' name='doit' value='logout'/>	
+						</c:when>
+						<c:otherwise>
+							<input type='submit' id ='login' name='doit' value='login'/>
+						</c:otherwise>
+						</c:choose>
+					</form>
 					</div>
 					<div id="search">
+					<form action="FRU">
 						<input type='submit' id ='doit' name='doit' value='search'/>
 						<input type='text' id ='searchText' name='searchItem' value='search'/>
+					</form>
 					</div>
-				</form>
 				<img src="#" id="banner" alt="FoodsRUs Banner"/>
 			</div>
 		</div>

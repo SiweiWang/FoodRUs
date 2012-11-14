@@ -17,12 +17,10 @@ version="2.0">
 <body>
 	<div id="main">
 		<div id="header">
-			<a href="#">
+			<a href="FRU">
        			<img src="#" id="logo" alt="FoodsRUs Logo"/>
    			</a>
-   			
 			<div id="headerRight">
-
 				<img src="#" id="banner" alt="FoodsRUs Banner"/>
 			</div>
 		</div>
