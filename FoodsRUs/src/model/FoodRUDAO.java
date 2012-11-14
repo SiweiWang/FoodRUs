@@ -224,11 +224,11 @@ public class FoodRUDAO {
 	 * @return the item identified by the unique item number
 	 * @throws SQLException
 	 */
-	public String validatePassword(String ClientID, String password) throws SQLException 
+	public ClientBean validatePassword(String ClientID, String password) throws SQLException 
 	{
 		Connection con = null;
 		PreparedStatement ps = null;
-		String ClientName = "NotFound";
+		ClientBean client = null;
 		try {
 			con = this.dataSource.getConnection();
 
@@ -240,7 +240,8 @@ public class FoodRUDAO {
 			{
 				if (password.equals(r.getString("PASSWORD")))
 					{
-						ClientName = r.getString("NAME");
+					
+						client = new ClientBean(Integer.parseInt(r.getString("NUMBER")),r.getString("NAME"),r.getString("PASSWORD"),r.getString("RATING"));
 					}
 			}
 			
@@ -248,7 +249,7 @@ public class FoodRUDAO {
 			if (con != null) con.close();
 			if (ps != null) ps.close();
 		}
-		return ClientName;
+		return client;
 	}
 
 }

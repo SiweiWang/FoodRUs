@@ -37,9 +37,9 @@ public class CheckOut extends HttpServlet {
 			}
 			else
 			{
+				
 				target="/checkout.jspx";
-				System.out.println("checkout -> checkout");
-
+				
 			}
 		}
 		else
