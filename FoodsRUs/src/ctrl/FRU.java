@@ -81,10 +81,10 @@ public class FRU extends HttpServlet {
 					if (add.equals("AddToCart"))
 					{
 					
-						ShoppingCartBean cart = (ShoppingCartBean)request.getSession().getAttribute("cart");
+						ShoppingCartHelper cart = (ShoppingCartHelper)request.getSession().getAttribute("cart");
 						if (cart == null)
 						{	
-							cart = new ShoppingCartBean();
+							cart = new ShoppingCartHelper();
 						}
 						
 						System.out.println("is cart null "  + cart == null);

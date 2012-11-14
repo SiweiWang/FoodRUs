@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @XmlRootElement(name="order")
-public class ShoppingCartBean {
+public class ShoppingCartHelper {
 
 	private static final double HSTRate = 1.13;
 	private static final double minOrder = 100;
@@ -48,7 +48,7 @@ public class ShoppingCartBean {
 	/**
 	 * 
 	 */
-	public ShoppingCartBean()
+	public ShoppingCartHelper()
 	{
 		this.shoppingCart = new HashMap<String, ItemBean>();
 		this.items = this.shoppingCart.values();
@@ -69,7 +69,7 @@ public class ShoppingCartBean {
 
 	/**
 	 * Update quantity of item in shoppingCart
-	 * @param ShoppingCartBean
+	 * @param ShoppingCartHelper
 	 * @param itemNumber
 	 * @param qty
 	 */
@@ -116,11 +116,11 @@ public class ShoppingCartBean {
 	private void updateShipping()
 	{
 		this.updateTotalPrice();
-		if (this.total > ShoppingCartBean.minOrder)
+		if (this.total > ShoppingCartHelper.minOrder)
 		{
-			this.setShipping(ShoppingCartBean.zeroShipping);
+			this.setShipping(ShoppingCartHelper.zeroShipping);
 		}else{
-			this.setShipping(ShoppingCartBean.standardShipping);
+			this.setShipping(ShoppingCartHelper.standardShipping);
 		}
 	}
 	
@@ -130,7 +130,7 @@ public class ShoppingCartBean {
 	private void updateHST()
 	{
 		this.updateShipping();
-		this.setHST((this.shipping + this.total)*ShoppingCartBean.HSTRate);
+		this.setHST((this.shipping + this.total)*ShoppingCartHelper.HSTRate);
 	}
 	
 	/**

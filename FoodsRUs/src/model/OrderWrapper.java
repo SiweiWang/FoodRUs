@@ -17,7 +17,7 @@ public class OrderWrapper {
 	private ClientBean customer;
 	
 	@XmlElement(name="items")
-	private ShoppingCartBean shoppingCart;
+	private ShoppingCartHelper shoppingCart;
 	
 	@XmlElement
 	private double total;
@@ -44,7 +44,7 @@ public class OrderWrapper {
 	 * @param shoppingCart
 	 */
 	public OrderWrapper(int id, Date submitted, ClientBean customer,
-			ShoppingCartBean shoppingCart) {
+			ShoppingCartHelper shoppingCart) {
 		this.id = id;
 		this.submitted = submitted;
 		this.customer = customer;

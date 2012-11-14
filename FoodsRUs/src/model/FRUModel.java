@@ -115,7 +115,7 @@ public class FRUModel {
      * @throws SQLException 
      * @throws Exception
      */
-    public void addToCart(ShoppingCartBean shoppingCart, String itemNumber, String qty) throws SQLException 
+    public void addToCart(ShoppingCartHelper shoppingCart, String itemNumber, String qty) throws SQLException 
     {
     	
 		System.out.println("is itemNumber in : " + shoppingCart.hasItem(itemNumber));
@@ -139,7 +139,7 @@ public class FRUModel {
      * @param itemNumber
      * @param qty
      */
-    public void updateCart(ShoppingCartBean shoppingCart, String itemNumber, int qty)
+    public void updateCart(ShoppingCartHelper shoppingCart, String itemNumber, int qty)
     {
     	//do we need to check the existence of the item(in cart)?
     	
@@ -150,7 +150,7 @@ public class FRUModel {
      * 
      * @param shoppingCart
      */
-    public void checkOut(ShoppingCartBean shoppingCart)
+    public void checkOut(ShoppingCartHelper shoppingCart)
     {
     	//more to be added, not sure how controller will use it.
     	
@@ -166,7 +166,7 @@ public class FRUModel {
      * @throws JAXBException 
      * @throws IOException 
      */
-    public void exportPO(String filename, int id, ClientBean customer, ShoppingCartBean shoppingCart) throws JAXBException, IOException
+    public void exportPO(String filename, int id, ClientBean customer, ShoppingCartHelper shoppingCart) throws JAXBException, IOException
     {
     		
 		JAXBContext jc = JAXBContext.newInstance(OrderWrapper.class);
