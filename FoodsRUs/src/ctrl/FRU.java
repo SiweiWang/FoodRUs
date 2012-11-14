@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.*;
 
@@ -63,6 +64,7 @@ public class FRU extends HttpServlet {
 		// let the button call doit 	
 		String target;
 		String doit = request.getParameter("doit");
+		HttpSession session= request.getSession();
 		FRUModel model = (FRUModel) this.getServletContext().getAttribute("fru"); 
 		if (doit == null)
 		{
@@ -81,19 +83,18 @@ public class FRU extends HttpServlet {
 					if (add.equals("AddToCart"))
 					{
 					
-						ShoppingCartHelper cart = (ShoppingCartHelper)request.getSession().getAttribute("cart");
+						ShoppingCartHelper cart = (ShoppingCartHelper)session.getAttribute("cart");
 						if (cart == null)
 						{	
 							cart = new ShoppingCartHelper();
 						}
 						
-						System.out.println("is cart null "  + cart == null);
 						try 
 						{
 							FRUModel fru = (FRUModel) this.getServletContext().getAttribute("fru");
 							fru.addToCart(cart, request.getParameter("itemToAdd"),request.getParameter("qtyToAdd"));	
 							
-							request.getSession().setAttribute("cart", cart);
+							session.setAttribute("cart", cart);
 						}
 						catch (SQLException e)
 						{

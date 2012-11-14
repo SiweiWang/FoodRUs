@@ -61,8 +61,6 @@ public class Login extends HttpServlet {
 						{
 							session.setAttribute("login", "y");	
 							session.setAttribute("ClientName", ClientName);
-							request.setAttribute("ClientName", session.getAttribute("ClientName"));
-							request.setAttribute("login", session.getAttribute("login"));
 							target = "/index.jspx";
 						}
 						else
