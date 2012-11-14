@@ -179,12 +179,7 @@ public class FRU extends HttpServlet {
 
 		
 		}
-		
-		synchronized(this)
-		{
-			this.getServletContext().setAttribute("id", (Integer)getServletContext().getAttribute("id") +1);
-		}
-		
+	
 		RequestDispatcher rd= request.getRequestDispatcher(target);
 		rd.forward(request, response);
 		

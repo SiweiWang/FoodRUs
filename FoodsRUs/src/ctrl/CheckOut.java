@@ -53,22 +53,37 @@ public class CheckOut extends HttpServlet {
 			if (checkout.equals("checkout") )
 			{
 				//do check out 
-				
-				FRUModel model = (FRUModel)this.getServletContext().getAttribute("fru");
-				String filename = Constants.FOLDERTOEXPORT + request.getSession().getId()+ Constants.XMLEXTENSION;
-
-				try {
-					ShoppingCartHelper cart = (ShoppingCartHelper) request.getSession().getAttribute("cart");
-					model.checkOut(cart);
-					model.exportPO(this.getServletContext().getRealPath(filename), (Integer)this.getServletContext().getAttribute("id"), 
-							(ClientBean)this.getServletContext().getAttribute("client"), cart);
-				} catch (JAXBException e) {
-					e.printStackTrace();
-					response.sendError(500);
+				if (request.getSession(false) == null || request.getSession().getAttribute("client") == null)
+				{
+					target = "/login.jspx";
 				}
-				
-				target= "/confirm.jspx";
-				System.out.println("confirmed");
+				else
+				{
+					
+
+					
+					FRUModel model = (FRUModel)this.getServletContext().getAttribute("fru");
+					ClientBean client = (ClientBean)request.getSession().getAttribute("client") ;
+					String filename = Constants.FOLDERTOEXPORT + client.getClientName()+"_"+(Integer)this.getServletContext().getAttribute("id") 
+								+ Constants.XMLEXTENSION;
+	
+					try {
+						ShoppingCartHelper cart = (ShoppingCartHelper) request.getSession().getAttribute("cart");
+						model.checkOut(cart);
+						model.exportPO(this.getServletContext().getRealPath(filename), (Integer)this.getServletContext().getAttribute("id"), 
+								(ClientBean)request.getSession().getAttribute("client"), cart);
+						synchronized(this)
+						{
+							this.getServletContext().setAttribute("id", (Integer)getServletContext().getAttribute("id") +1);
+						}
+					} catch (JAXBException e) {
+						e.printStackTrace();
+						response.sendError(500);
+					}
+					
+					target= "/confirm.jspx";
+					System.out.println("confirmed");
+				}
 			}
 			else
 			{
