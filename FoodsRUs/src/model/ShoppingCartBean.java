@@ -50,7 +50,7 @@ public class ShoppingCartBean {
 	 */
 	public ShoppingCartBean()
 	{
-		
+		this.shoppingCart = new HashMap<String, ItemBean>();
 	}
 	
 	
