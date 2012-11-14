@@ -15,7 +15,9 @@ version="2.0">
 <title>FoodsRUs</title>
 </head>
 <body>
-		<jsp:include page="header.jspx"/>
+	<div id="main">
+			<jsp:include page="header.jspx"/>
+			
 			<form action='Login'> 	
 				<fieldset>
 					<legend>FoodsRUs customer login</legend>
@@ -33,7 +35,7 @@ version="2.0">
 				</fieldset>	
 			</form>
 			
-		<jsp:include page="footer.jspx"/>
+			<jsp:include page="footer.jspx"/>
 		
 	</div>
 </body>
