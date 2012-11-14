@@ -39,7 +39,7 @@ version="2.0">
 					</div>
 					<div id="search">
 						<input type='submit' id ='doit' name='doit' value='search'/>
-						<input type='text' id ='searchText' name='searchItem' value=''/>
+						<input type='text' id ='searchText' name='searchItem' value='search'/>
 					</div>
 				</form>
 				<img src="#" id="banner" alt="FoodsRUs Banner"/>

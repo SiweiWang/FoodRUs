@@ -17,12 +17,12 @@
 <body>
 	<div id="main">
 		<div id="header">
-			<a href="#">
+			<a href="FRU">
        			<img src="#" id="logo" alt="FoodsRUs Logo"/>
    			</a>
    			
 			<div id="headerRight">
-				<form action="">
+				<form action="FRU">
 					<div id="buttons">	
 						<input type='submit' id ='doit' name='doit' value='express'/>
 						<input type='submit' id ='doit' name='doit' value='checkout'/>
@@ -31,7 +31,7 @@
 					</div>
 					<div id="search">
 						<input type='submit' id ='doit' name='doit' value='search'/>
-						<input type='text' id ='searchText' name='search' value='search'/>
+						<input type='text' id ='searchText' name='searchItem' value='search'/>
 					</div>
 				</form>
 				<img src="#" id="banner" alt="FoodsRUs Banner"/>
