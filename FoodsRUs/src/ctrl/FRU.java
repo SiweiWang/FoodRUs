@@ -113,13 +113,13 @@ public class FRU extends HttpServlet {
 					if(si.matches(regex1))
 					{
 					  List<ItemBean> ibl = model.searchItemNumber(si);
-					  request.setAttribute("searchList", ibl);
+					  request.setAttribute("item", ibl);
 					  System.out.println("inside if1 " + si );
 					  
 					}else
 					{
 					  List<ItemBean> ibl = model.searchItemName(si);
-					  request.setAttribute("searchList", ibl);
+					  request.setAttribute("item", ibl);
 					  System.out.println("inside else1");
 					}
 				} catch (SQLException e)
@@ -127,7 +127,7 @@ public class FRU extends HttpServlet {
 					e.printStackTrace();
 				}
 
-				target="/search.jspx";
+				target="/category.jspx";
 			}
 			else if (doit.equals("logout"))
 			{
