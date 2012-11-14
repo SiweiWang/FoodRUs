@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.FRUModel;
 import model.ItemBean;
-import model.ShoppingCartBean;
+import model.ShoppingCartHelper;
 
 /**
  * Servlet implementation class ShoppingCart
@@ -39,10 +39,10 @@ public class ShoppingCart extends HttpServlet {
 			if (add.equals("AddToCart"))
 			{
 				
-				ShoppingCartBean cart = (ShoppingCartBean)request.getSession().getAttribute("cart");
+				ShoppingCartHelper cart = (ShoppingCartHelper)request.getSession().getAttribute("cart");
 				if (cart == null)
 				{	
-					cart = new ShoppingCartBean();
+					cart = new ShoppingCartHelper();
 				}
 				try 
 				{
