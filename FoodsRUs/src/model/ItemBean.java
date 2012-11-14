@@ -7,35 +7,45 @@ import java.text.DecimalFormat;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author 
  *
  */
+@XmlType (propOrder={"itemNumber","name","price", "quantity","extended"})
 public class ItemBean {
 
-	DecimalFormat twoDForm = new DecimalFormat("#.##");
+	private final static DecimalFormat twoDForm = new DecimalFormat("#.##");
 	
-	@XmlAttribute(name="number")
+	private final static DecimalFormat oneDForm = new DecimalFormat("#.#");
+	
+	
 	private String itemNumber;
 	
-	@XmlElement
+
 	private String name;
 	
-	@XmlElement
+
 	private double price;
 	
-	@XmlElement
+
 	private int quantity;
 	
-	@XmlElement
+
 	private double extended;
 	
 	//Category ID;
+
 	private int catID;
+
 	private int onOrder;
+
 	private int reOrder;
+
 	private double cost;
+
 	private int supID;
 		
 	/**
@@ -48,13 +58,14 @@ public class ItemBean {
 	{
 		this.itemNumber = itemNumber;
 		this.name = itemName;
-		this.price = Double.valueOf(twoDForm.format(price));;
+		this.price = Double.valueOf(twoDForm.format(price));
 		this.catID = catID;
 	}
 
 	/**
 	 * @return the itemNumber
 	 */
+	@XmlAttribute(name="number")
 	public String getItemNumber()
 	{
 		return itemNumber;
@@ -114,75 +125,32 @@ public class ItemBean {
 	public void setQuantity(int quantity)
 	{
 		this.quantity = quantity;
+		this.extended = Double.valueOf(twoDForm.format(this.quantity * this.price));
+		
 	}
 
 	/**
 	 * @return the extended
 	 */
+	@XmlElement
 	public double getExtended()
 	{
 		return extended;
 	}
 
 	/**
-	 * @param extended the extended to set
-	 */
-	public void setExtended(double extended)
-	{
-		this.extended = extended;
-	}
-
-	/**
 	 * @return the catID
 	 */
+	@XmlTransient
 	public int getCatID()
 	{
 		return catID;
 	}
 
 	/**
-	 * @param catID the catID to set
-	 */
-	public void setCatID(int catID)
-	{
-		this.catID = catID;
-	}
-
-	/**
-	 * @return the onOrder
-	 */
-	public int getOnOrder()
-	{
-		return onOrder;
-	}
-
-	/**
-	 * @param onOrder the onOrder to set
-	 */
-	public void setOnOrder(int onOrder)
-	{
-		this.onOrder = onOrder;
-	}
-
-	/**
-	 * @return the reOrder
-	 */
-	public int getReOrder()
-	{
-		return reOrder;
-	}
-
-	/**
-	 * @param reOrder the reOrder to set
-	 */
-	public void setReOrder(int reOrder)
-	{
-		this.reOrder = reOrder;
-	}
-
-	/**
 	 * @return the cost
 	 */
+	@XmlTransient
 	public double getCost()
 	{
 		return cost;
@@ -199,6 +167,7 @@ public class ItemBean {
 	/**
 	 * @return the supID
 	 */
+	@XmlTransient
 	public int getSupID()
 	{
 		return supID;
