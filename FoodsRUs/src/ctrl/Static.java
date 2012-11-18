@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class Static
+ * print out the static of the website, has client number and ave checkout time now
+ * more static can be add in later on
  */
 @WebServlet("/Static")
 public class Static extends HttpServlet {
@@ -29,7 +31,7 @@ public class Static extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String target = "static.jspx";
+		String target = "static.jspx";  
 		RequestDispatcher rd = request.getRequestDispatcher(target);
 		rd.forward(request, response);
 	}
