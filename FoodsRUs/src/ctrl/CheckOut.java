@@ -23,7 +23,7 @@ public class CheckOut extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckOut() {
+    public CheckOut() {   
         super();
         // TODO Auto-generated constructor stub
     }
@@ -62,9 +62,7 @@ public class CheckOut extends HttpServlet {
 				}
 				else
 				{
-					
-
-					
+									
 					FRUModel model = (FRUModel)this.getServletContext().getAttribute("fru");
 					ClientBean client = (ClientBean)request.getSession().getAttribute("client") ;
 					String filename = Constants.FOLDERTOEXPORT + client.getClientName()+"_"+(Integer)this.getServletContext().getAttribute("id") 
