@@ -19,7 +19,7 @@ public class Static extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * @see HttpServlet#HttpServlet()
+     *    @see HttpServlet#HttpServlet()
      */
     public Static() {
         super();
@@ -34,6 +34,7 @@ public class Static extends HttpServlet {
 		String target = "static.jspx";  
 		RequestDispatcher rd = request.getRequestDispatcher(target);
 		rd.forward(request, response);
+		
 	}
 
 	/**

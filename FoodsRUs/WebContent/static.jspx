@@ -14,14 +14,16 @@
            <table id="static" border = "1">
                 <caption>the Static of the clients</caption>
                 <tr>
-				<td>customer number</td>
 				<td>average checkout time</td>
+				<td>activate customer number</td>
 				</tr>
 	        		<tr>
-					<td>${totalCustomer}</td>
+
 					<td>${ave_fresh_checkout} second</td>
+					<td>${map.size()}</td>
 					</tr>	
 			</table>
+			
 </body>
 </html>
 </jsp:root>
