@@ -3,7 +3,8 @@
  */
 package model;
 
-import java.text.DecimalFormat;
+import Util.*;
+
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -14,6 +15,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author 
  *
  */
+@XmlType(name="items", propOrder = {"name", "price", "quantity", "extended"})
 public class ItemBean {
 
 	public ItemBean() {
@@ -21,11 +23,7 @@ public class ItemBean {
 		// TODO Auto-generated constructor stub
 	}
 
-	private final static DecimalFormat twoDForm = new DecimalFormat("#.##");
-	
-	private final static DecimalFormat oneDForm = new DecimalFormat("#.#");
-	
-	
+		
 	private String itemNumber;
 	
 
@@ -62,7 +60,7 @@ public class ItemBean {
 	{
 		this.itemNumber = itemNumber;
 		this.name = itemName;
-		this.price = Double.valueOf(twoDForm.format(price));
+		this.price = Double.valueOf(Constants.twoDForm.format(price));
 		this.catID = catID;
 	}
 
@@ -129,7 +127,7 @@ public class ItemBean {
 	public void setQuantity(int quantity)
 	{
 		this.quantity = quantity;
-		this.extended = Double.valueOf(twoDForm.format(this.quantity * this.price));
+		this.extended = Double.valueOf(Constants.twoDForm.format(this.quantity * this.price));
 		
 	}
 

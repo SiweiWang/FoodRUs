@@ -1,11 +1,10 @@
 package model;
 
-import java.util.Date;
-
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
 
 @XmlRootElement(name="order")
 public class OrderWrapper {
@@ -14,7 +13,7 @@ public class OrderWrapper {
 	private int id;
 	
 	@XmlAttribute
-	private Date submitted;
+	private String submitted;
 	
 	@XmlElement
 	private ClientBean customer;
@@ -46,7 +45,7 @@ public class OrderWrapper {
 	 * @param customer
 	 * @param shoppingCart
 	 */
-	public OrderWrapper(int id, Date submitted, ClientBean customer,
+	public OrderWrapper(int id, String submitted, ClientBean customer,
 			ShoppingCartHelper shoppingCart) {
 		this.id = id;
 		this.submitted = submitted;

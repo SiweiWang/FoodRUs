@@ -4,13 +4,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.List;
+
+import java.util.*;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.transform.stream.StreamResult;
+
 
 /**
  * 
@@ -170,8 +171,11 @@ public class FRUModel {
     {
     		
 		JAXBContext jc = JAXBContext.newInstance(OrderWrapper.class);
+		
+		String today = new java.sql.Date(System.currentTimeMillis()).toString();
+		
 
-		OrderWrapper ow = new OrderWrapper(id, new Date(), customer, shoppingCart);
+		OrderWrapper ow = new OrderWrapper(id, today, customer, shoppingCart);
 		Marshaller marshaller = jc.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);

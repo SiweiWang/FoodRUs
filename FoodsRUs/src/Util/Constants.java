@@ -1,5 +1,7 @@
 package Util;
 
+import java.text.DecimalFormat;
+
 
 /**
  * 
@@ -15,4 +17,8 @@ public  class Constants
 	
 	
 	public static final String MYERRORPAGE = "/myError.jspx";
+	
+	public static final DecimalFormat twoDForm = new DecimalFormat("#.##");
+
+	public static final DecimalFormat oneDForm = new DecimalFormat("#.#");
 }

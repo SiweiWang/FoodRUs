@@ -10,6 +10,8 @@ import java.util.HashMap;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import Util.Constants;
+
 /**
  * @author
  *
@@ -107,7 +109,7 @@ public class ShoppingCartHelper {
 		{
 			totalPrice += (item.getPrice() * item.getQuantity());
 		}
-		this.setTotal(totalPrice);
+		this.setTotal(Double.valueOf(Constants.twoDForm.format(totalPrice)));
 	}
 	
 	/**
@@ -130,7 +132,7 @@ public class ShoppingCartHelper {
 	private void updateHST()
 	{
 		this.updateShipping();
-		this.setHST((this.shipping + this.total)*ShoppingCartHelper.HSTRate);
+		this.setHST(Double.valueOf(Constants.twoDForm.format((this.shipping + this.total)*ShoppingCartHelper.HSTRate)));
 	}
 	
 	/**
@@ -139,7 +141,7 @@ public class ShoppingCartHelper {
 	private void calculateGrandTotal()
 	{
 		this.updateHST();
-		this.setGrandTotal(this.getTotal() + this.getShipping() + this.getHST());
+		this.setGrandTotal(Double.valueOf(Constants.twoDForm.format(this.getTotal() + this.getShipping() + this.getHST())));
 	}
 	
 	/**
