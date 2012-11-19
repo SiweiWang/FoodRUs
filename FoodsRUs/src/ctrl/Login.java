@@ -75,7 +75,6 @@ public class Login extends HttpServlet {
 						e.printStackTrace();
 						request.setAttribute("loginError", e.getMessage());
 						target = "/login.jspx";
-
 					}
 
 				}

@@ -15,7 +15,7 @@ version="2.0">
 <body>
 	<div id="header">
 		<a href="FRU">
-      		<img src="#" id="logo" alt="FoodsRUs Logo"/>
+      		<img src="images/carts.png" id="logo" alt="FoodsRUs Logo"/>
   		</a>
 		
 		<div id="headerRight">
@@ -43,7 +43,7 @@ version="2.0">
 				</form>
 			</div>
 				
-			<img src="#" id="banner" alt="FoodsRUs Banner"/>			
+			<img src="images/banner.png" id="banner" alt="FoodsRUs Banner"/>	
 		</div>
 	</div>
 </body>

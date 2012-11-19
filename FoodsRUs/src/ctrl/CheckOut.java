@@ -46,20 +46,25 @@ public class CheckOut extends HttpServlet {
 			}
 			else
 			{
-				
-				target="/checkout.jspx";
-				
+				target="/checkout.jspx";	
 			}
 		}
 		else
 		{
 			if (checkout.equals("checkout") )
 			{
+				ShoppingCartHelper cart = (ShoppingCartHelper) request.getSession().getAttribute("cart");
+
 				//do check out 
 				if (request.getSession(false) == null || request.getSession().getAttribute("client") == null)
 				{
 					request.setAttribute("checkoutError", "You haven't logged in, please login before check out");
 					target = "/login.jspx";
+				}
+				else if (cart== null  || cart.getItems().size() == 0) 
+				{
+					request.setAttribute("checkoutError", "Can not check out, you cart is empty");
+					target="/checkout.jspx";	
 				}
 				else
 				{
@@ -68,9 +73,11 @@ public class CheckOut extends HttpServlet {
 					ClientBean client = (ClientBean)request.getSession().getAttribute("client") ;
 					String filename = Constants.FOLDERTOEXPORT + client.getClientName()+"_"+(Integer)this.getServletContext().getAttribute("id") 
 								+ Constants.XMLEXTENSION;
+					request.setAttribute("filename", filename); 
+
 					request.getSession().setAttribute("checkout", "checkout");// for counting the access time before checkout 
 					try {
-						ShoppingCartHelper cart = (ShoppingCartHelper) request.getSession().getAttribute("cart");
+						cart = (ShoppingCartHelper) request.getSession().getAttribute("cart");
 						model.checkOut(cart);
 						model.exportPO(this.getServletContext().getRealPath(filename), (Integer)this.getServletContext().getAttribute("id"), 
 								(ClientBean)request.getSession().getAttribute("client"), cart);
@@ -82,6 +89,11 @@ public class CheckOut extends HttpServlet {
 					} catch (JAXBException e) {
 						e.printStackTrace();
 						response.sendError(500);
+					}
+					finally
+					{
+						request.getSession().setAttribute("cart",null);
+
 					}
 					target= "/confirm.jspx";
 				}

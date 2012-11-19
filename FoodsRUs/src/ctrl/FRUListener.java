@@ -120,7 +120,6 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
     public void sessionDestroyed(HttpSessionEvent se) {
         // TODO Auto-generated method stub
     	String id = se.getSession().getId();
-      	@SuppressWarnings("unchecked")
 		Map<String, Integer> bag = (HashMap<String, Integer>) se.getSession().getServletContext().getAttribute("map");
     	bag.remove(id);
     	se.getSession().getServletContext().setAttribute("map", bag);
