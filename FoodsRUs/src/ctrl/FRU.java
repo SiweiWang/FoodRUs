@@ -127,9 +127,7 @@ public class FRU extends HttpServlet {
 		}
 		
 		else 
-		{
-		
-			
+		{	
 			if (doit.equals("login"))
 			{
 				target = "/login.jspx";
@@ -165,24 +163,24 @@ public class FRU extends HttpServlet {
 				{
 					e.printStackTrace();
 				}
-
 				target="/category.jspx";
 			}
 			else if (doit.equals("logout"))
 			{
+				request.getSession(true).invalidate();
 				target = "/index.jspx";
 			}
-			else
+			else if (doit.equals("express"))
 			{
 				target = "/express.jspx";
 			}
-
-		
+			else
+			{
+				target ="/myError.jspx";
+			}
 		}
-	
 		RequestDispatcher rd= request.getRequestDispatcher(target);
-		rd.forward(request, response);
-		
+		rd.forward(request, response);	
 	}
 
 	
