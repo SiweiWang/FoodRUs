@@ -58,6 +58,7 @@ public class CheckOut extends HttpServlet {
 				//do check out 
 				if (request.getSession(false) == null || request.getSession().getAttribute("client") == null)
 				{
+					request.setAttribute("checkoutError", "You haven't logged in, please login before check out");
 					target = "/login.jspx";
 				}
 				else
@@ -82,15 +83,12 @@ public class CheckOut extends HttpServlet {
 						e.printStackTrace();
 						response.sendError(500);
 					}
-					
 					target= "/confirm.jspx";
-					System.out.println("confirmed");
 				}
 			}
 			else
 			{
 				target = "/index.jspx";
-				System.out.println("continue shopping");
 				request.getSession().setAttribute("continue", "again"); // for listener
 				
 

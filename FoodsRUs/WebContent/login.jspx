@@ -24,6 +24,9 @@ version="2.0">
 						<c:if test="${not empty loginError}">
 							<p>${loginError}</p>
 						</c:if>
+						<c:if test="${not empty checkoutError}">
+							<p>${checkoutError}</p>
+						</c:if>
 						<label for='ClientID'>ClientID</label> 			
 						<input type ='text' id ='ClientID' name='ClientID' value='${ClientID}'/>
 						
