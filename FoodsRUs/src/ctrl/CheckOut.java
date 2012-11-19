@@ -23,7 +23,7 @@ public class CheckOut extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckOut() {
+    public CheckOut() {   
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +34,9 @@ public class CheckOut extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String checkout = request.getParameter("checkout");
 		String target;
+		if(request.getSession().getAttribute("continue") == null){
+		request.getSession().setAttribute("continue", "first"); // for listener
+		}
 		if (checkout==null)
 		{
 			if (request.getSession(false) == null || !request.getSession().getAttribute("login").equals("login"))
@@ -59,19 +62,18 @@ public class CheckOut extends HttpServlet {
 				}
 				else
 				{
-					
-
-					
+									
 					FRUModel model = (FRUModel)this.getServletContext().getAttribute("fru");
 					ClientBean client = (ClientBean)request.getSession().getAttribute("client") ;
 					String filename = Constants.FOLDERTOEXPORT + client.getClientName()+"_"+(Integer)this.getServletContext().getAttribute("id") 
 								+ Constants.XMLEXTENSION;
-	
+					request.getSession().setAttribute("checkout", "checkout");// for counting the access time before checkout 
 					try {
 						ShoppingCartHelper cart = (ShoppingCartHelper) request.getSession().getAttribute("cart");
 						model.checkOut(cart);
 						model.exportPO(this.getServletContext().getRealPath(filename), (Integer)this.getServletContext().getAttribute("id"), 
 								(ClientBean)request.getSession().getAttribute("client"), cart);
+						request.getSession().setAttribute("continue", "again"); // for listener
 						synchronized(this)
 						{
 							this.getServletContext().setAttribute("id", (Integer)getServletContext().getAttribute("id") +1);
@@ -89,6 +91,8 @@ public class CheckOut extends HttpServlet {
 			{
 				target = "/index.jspx";
 				System.out.println("continue shopping");
+				request.getSession().setAttribute("continue", "again"); // for listener
+				
 
 			}
 		}

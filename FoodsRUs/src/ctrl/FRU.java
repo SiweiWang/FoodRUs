@@ -153,13 +153,13 @@ public class FRU extends HttpServlet {
 					{
 					  List<ItemBean> ibl = model.searchItemNumber(si);
 					  request.setAttribute("item", ibl);
-					  System.out.println("inside if1 " + si );
+
 					  
 					}else
 					{
 					  List<ItemBean> ibl = model.searchItemName(si);
 					  request.setAttribute("item", ibl);
-					  System.out.println("inside else1");
+
 					}
 				} catch (SQLException e)
 				{
