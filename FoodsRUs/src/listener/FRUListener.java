@@ -30,7 +30,7 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
 	private double ave_fresh_checkout=0;
 	final double MINISECOND_PER_SECOND = 1000;
 	private Map<String,Integer> bag = new HashMap<String,Integer>();
-	private Integer freq =0;
+
 	
     public FRUListener() {
         // TODO Auto-generated constructor stub
