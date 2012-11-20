@@ -27,6 +27,7 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
 
 	private double totalAveTime =0;
 	private int totalCustomer =0;
+	private int viewer=0;
 	private double ave_fresh_checkout=0;
 	final double MINISECOND_PER_SECOND = 1000;
 	private Map<String,Integer> bag = new HashMap<String,Integer>();
@@ -100,17 +101,17 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
     	{
     		se.getSession().getServletContext().setAttribute("map", bag);
     	}
-    	if(se.getSession().getServletContext().getAttribute("totalCustomer") == null)
+    	if(se.getSession().getServletContext().getAttribute("viewer") == null)
     	{
-    		se.getSession().getServletContext().setAttribute("totalCustomer", totalCustomer);
+    		se.getSession().getServletContext().setAttribute("viewer", viewer);
     	}
  
 		this.bag = (HashMap<String, Integer>) se.getSession().getServletContext().getAttribute("map");
     	this.bag.put(id, 1);
     	se.getSession().getServletContext().setAttribute("map", this.bag);
     	//System.out.println("map ele number : " + bag.size());
-        this.totalCustomer= this.totalCustomer +1;
-        se.getSession().getServletContext().setAttribute("totalCustomer", totalCustomer);
+        this.viewer= this.viewer +1;
+        se.getSession().getServletContext().setAttribute("viewer", viewer);
     }
 
 	/**
@@ -156,9 +157,10 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
     		long startT = arg0.getSession().getCreationTime();
             double checkoutTime = arg0.getSession().getLastAccessedTime();
     	    double diffTime = (checkoutTime - startT)/MINISECOND_PER_SECOND;
-
+             this.totalCustomer = this.totalCustomer +1;
     	    totalAveTime = totalAveTime + diffTime;
     	    ave_fresh_checkout = totalAveTime /totalCustomer;
+    	    
     	    //System.out.println("the ave time1 is: " + ave_fresh_checkout);
     	    
     	    arg0.getSession().getServletContext().setAttribute("ave_fresh_checkout", ave_fresh_checkout);
