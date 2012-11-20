@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBException;
 
-import Util.*;
+import util.*;
+
 import model.ClientBean;
 import model.FRUModel;
 import model.ShoppingCartHelper;
