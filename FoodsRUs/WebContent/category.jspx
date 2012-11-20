@@ -12,6 +12,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
+<script type="text/javascript" src="js/index.js">;</script>
 <title>FoodsRUs</title>
 </head>
 <body>
@@ -42,7 +43,7 @@
 					<td>${item.name}</td>
 					<td>${item.price}</td>
 					<td>
-						<form action="ShoppingCart" method="POST">
+						<form action="ShoppingCart" method="POST" onsubmit="return checkQty(this);">
 							<input type="hidden" id="itemToAdd" name="itemToAdd" value="${item.itemNumber}"/>
 							<input class='qtyInput' type='text' id ='qtyToAdd' name='qtyToAdd' value='0'/>
 							<input type='submit' id ='add' name='add' value='AddToCart'/>

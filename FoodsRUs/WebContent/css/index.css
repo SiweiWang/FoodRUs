@@ -103,6 +103,8 @@ body {
 #itemtable td
 {
 	border: 2px solid black;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 #itemtable form{
@@ -111,7 +113,7 @@ body {
 }
 
 .qtyInput {
-	width: 50px;
+	width: 40px;
 	margin: 5px;
 }
 
