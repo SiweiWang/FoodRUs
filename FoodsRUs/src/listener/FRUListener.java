@@ -100,11 +100,17 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
     	{
     		se.getSession().getServletContext().setAttribute("map", bag);
     	}
-    	@SuppressWarnings("unchecked")
-		Map<String, Integer> bag = (HashMap<String, Integer>) se.getSession().getServletContext().getAttribute("map");
-    	bag.put(id, 1);
-    	se.getSession().getServletContext().setAttribute("map", bag);
-    	System.out.println("map ele number : " + bag.size());
+    	if(se.getSession().getServletContext().getAttribute("totalCustomer") == null)
+    	{
+    		se.getSession().getServletContext().setAttribute("totalCustomer", totalCustomer);
+    	}
+ 
+		this.bag = (HashMap<String, Integer>) se.getSession().getServletContext().getAttribute("map");
+    	this.bag.put(id, 1);
+    	se.getSession().getServletContext().setAttribute("map", this.bag);
+    	//System.out.println("map ele number : " + bag.size());
+        this.totalCustomer= this.totalCustomer +1;
+        se.getSession().getServletContext().setAttribute("totalCustomer", totalCustomer);
     }
 
 	/**
@@ -120,9 +126,9 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
     public void sessionDestroyed(HttpSessionEvent se) {
         // TODO Auto-generated method stub
     	String id = se.getSession().getId();
-		Map<String, Integer> bag = (HashMap<String, Integer>) se.getSession().getServletContext().getAttribute("map");
-    	bag.remove(id);
-    	se.getSession().getServletContext().setAttribute("map", bag);
+		this.bag = (HashMap<String, Integer>) se.getSession().getServletContext().getAttribute("map");
+    	this.bag.remove(id);
+    	se.getSession().getServletContext().setAttribute("map", this.bag);
     	
     }
 
@@ -150,13 +156,13 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
     		long startT = arg0.getSession().getCreationTime();
             double checkoutTime = arg0.getSession().getLastAccessedTime();
     	    double diffTime = (checkoutTime - startT)/MINISECOND_PER_SECOND;
-            totalCustomer = totalCustomer + 1;
+
     	    totalAveTime = totalAveTime + diffTime;
     	    ave_fresh_checkout = totalAveTime /totalCustomer;
-    	    System.out.println("the ave time1 is: " + ave_fresh_checkout);
+    	    //System.out.println("the ave time1 is: " + ave_fresh_checkout);
     	    
     	    arg0.getSession().getServletContext().setAttribute("ave_fresh_checkout", ave_fresh_checkout);
-    	    arg0.getSession().getServletContext().setAttribute("totalCustomer",totalCustomer);
+    
     		}
     	}
 
