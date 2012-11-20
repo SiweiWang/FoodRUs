@@ -161,8 +161,8 @@ public class FoodRUDAO {
 		try {
 			con = this.dataSource.getConnection();
 
-			String query = "Select * from roumani.item where NAME like '%" +
-				itemName +"%'" ;
+			String query = "Select * from roumani.item where UPPER(NAME) like UPPER('%" +
+				itemName +"%')" ;
 			ps = con.prepareStatement(query);
 
 	
