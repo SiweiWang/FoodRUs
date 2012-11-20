@@ -9,33 +9,105 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="order")
 public class OrderWrapper {
 
-	@XmlAttribute
 	private int id;
 	
-	@XmlAttribute
 	private String submitted;
 	
-	@XmlElement
 	private ClientBean customer;
 	
-	@XmlElement(name="items")
 	private ShoppingCartHelper shoppingCart;
 	
-	@XmlElement
 	private double total;
 	
-	@XmlElement
 	private double shipping;
 	
-	@XmlElement
 	private double HST;
 	
-	@XmlElement
 	private double grandTotal;
 	
 	
 	public OrderWrapper() {
 		// TODO Auto-generated constructor stub
+	}
+
+	@XmlAttribute
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@XmlAttribute
+	public String getSubmitted() {
+		return submitted;
+	}
+
+
+	public void setSubmitted(String submitted) {
+		this.submitted = submitted;
+	}
+
+	@XmlElement
+	public ClientBean getCustomer() {
+		return customer;
+	}
+
+
+	public void setCustomer(ClientBean customer) {
+		this.customer = customer;
+	}
+
+	@XmlElement(name="items")
+	public ShoppingCartHelper getShoppingCart() {
+		return shoppingCart;
+	}
+
+
+	public void setShoppingCart(ShoppingCartHelper shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}
+
+	@XmlElement
+	public double getTotal() {
+		return total;
+	}
+
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	@XmlElement
+	public double getShipping() {
+		return shipping;
+	}
+
+
+	public void setShipping(double shipping) {
+		this.shipping = shipping;
+	}
+
+	@XmlElement
+	public double getHST() {
+		return HST;
+	}
+
+
+	public void setHST(double hST) {
+		HST = hST;
+	}
+
+	@XmlElement
+	public double getGrandTotal() {
+		return grandTotal;
+	}
+
+
+	public void setGrandTotal(double grandTotal) {
+		this.grandTotal = grandTotal;
 	}
 
 
