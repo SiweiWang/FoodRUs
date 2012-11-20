@@ -184,7 +184,7 @@ public class FRUModel {
 		
 		sw.write("<?xml version='1.0'?>\n");
 		
-		//sw.write("<?xml-stylesheet type='text/xsl' href='SIS.xsl'?>\n");
+		sw.write("<?xml-stylesheet type='text/xsl' href='po.xsl'?>\n");
 		marshaller.marshal(ow, new StreamResult(sw));
 
 		FileWriter fw = new FileWriter(filename);
