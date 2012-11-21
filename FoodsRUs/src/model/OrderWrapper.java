@@ -19,7 +19,7 @@ public class OrderWrapper {
 	
 	private ClientBean customer;
 	
-	private Collection<ItemBean> items;
+	private ItemSBean items;
 	//private ShoppingCartHelper shoppingCart;
 	
 	private double total;
@@ -66,12 +66,12 @@ public class OrderWrapper {
 	}
 
 	@XmlElement
-	public Collection<ItemBean>  getItems() {
+	public ItemSBean getItems() {
 		return items;
 	}
 
 
-	public void setItems(Collection<ItemBean> items) {
+	public void setItems(ItemSBean items) {
 		this.items = items;
 	}
 
@@ -127,7 +127,7 @@ public class OrderWrapper {
 	 * @param grandTotal
 	 */
 	public OrderWrapper(int id, String submitted, ClientBean customer,
-			Collection<ItemBean> items, double total, double shipping, double hST,
+			ItemSBean items, double total, double shipping, double hST,
 			double grandTotal) {
 		this.id = id;
 		this.submitted = submitted;

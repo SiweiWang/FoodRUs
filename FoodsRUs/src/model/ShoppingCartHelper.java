@@ -20,7 +20,7 @@ import util.Constants;
 
 public class ShoppingCartHelper {
 
-	private static final double HSTRate = 1.13;
+	private static final double HSTRate = 0.13;
 	private static final double minOrder = 100;
 	private static final double zeroShipping = 0;
 	private static final double standardShipping = 5;
