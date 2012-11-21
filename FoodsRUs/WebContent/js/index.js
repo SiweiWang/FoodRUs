@@ -10,3 +10,8 @@ function checkQty(form)
 	}	
 	return ok;
 }
+
+function clearSearchBox(box)
+{
+	box.value = "";
+}

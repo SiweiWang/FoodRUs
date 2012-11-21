@@ -11,6 +11,7 @@ version="2.0">
 		omit-xml-declaration="true" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<script type="text/javascript" src="js/index.js">;</script>
 </head>
 <body>
 	<div id="header">
@@ -39,7 +40,7 @@ version="2.0">
 			<div id="search">
 				<form action="FRU">
 					<input type='submit' id ='searchBtn' name='doit' value='search'/>
-					<input type='text' id ='searchText' name='searchItem' value='search'/>
+					<input type='text' id ='searchText' name='searchItem' value='search' onclick="clearSearchBox(this);"/>
 				</form>
 			</div>
 				

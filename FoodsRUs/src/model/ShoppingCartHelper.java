@@ -17,7 +17,7 @@ import util.Constants;
  * @author
  *
  */
-@XmlRootElement(name="order")
+
 public class ShoppingCartHelper {
 
 	private static final double HSTRate = 1.13;
