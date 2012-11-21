@@ -25,10 +25,11 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
      * Default constructor. 
      */
 
-	private double totalAveTime =0;
-	private int totalCustomer =0;
+	private double totalCheckOutTime =0;
+	private int totalCustomer =1;
 	private int viewer=0;
 	private double ave_fresh_checkout=0;
+	private double totalAddItmeTime=0;
 	final double MINISECOND_PER_SECOND = 1000;
 	private Map<String,Integer> bag = new HashMap<String,Integer>();
 
@@ -50,7 +51,7 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
      */
     public void attributeRemoved(HttpSessionBindingEvent se) {
         // TODO Auto-generated method stub
-    	handle(se);
+
     }
 
 	/**
@@ -109,7 +110,7 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
 		this.bag = (HashMap<String, Integer>) se.getSession().getServletContext().getAttribute("map");
     	this.bag.put(id, 1);
     	se.getSession().getServletContext().setAttribute("map", this.bag);
-    	//System.out.println("map ele number : " + bag.size());
+    	//System.out.println("max idel time : " + se.getSession().getMaxInactiveInterval());
         this.viewer= this.viewer +1;
         se.getSession().getServletContext().setAttribute("viewer", viewer);
     }
@@ -130,6 +131,7 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
 		this.bag = (HashMap<String, Integer>) se.getSession().getServletContext().getAttribute("map");
     	this.bag.remove(id);
     	se.getSession().getServletContext().setAttribute("map", this.bag);
+    	System.out.println("session is destoried");
     	
     }
 
@@ -157,19 +159,29 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
     		long startT = arg0.getSession().getCreationTime();
             double checkoutTime = arg0.getSession().getLastAccessedTime();
     	    double diffTime = (checkoutTime - startT)/MINISECOND_PER_SECOND;
-             this.totalCustomer = this.totalCustomer +1;
-    	    totalAveTime = totalAveTime + diffTime;
-    	    ave_fresh_checkout = totalAveTime /totalCustomer;
-    	    
-    	    //System.out.println("the ave time1 is: " + ave_fresh_checkout);
+             
+             totalCheckOutTime = totalCheckOutTime + diffTime;
+    	    ave_fresh_checkout = totalCheckOutTime /totalCustomer;
+    	    this.totalCustomer = this.totalCustomer +1;
+    	    System.out.println("the custome num: " + totalCustomer + "the ave time1 is: " + ave_fresh_checkout);
     	    
     	    arg0.getSession().getServletContext().setAttribute("ave_fresh_checkout", ave_fresh_checkout);
-    
+    	    System.out.println("the ave_checkout time is: " + ave_fresh_checkout);
     		}
     	}
-
-
-    	
+    	    if(arg0.getSession().getAttribute("newCart") != null && arg0.getSession().getAttribute("newCart").equals("new"))
+    	    {
+			    System.out.println("inside lisener the newCart is :" + arg0.getSession().getAttribute("newCart") );
+    	    	arg0.getSession().setAttribute("newCart", "old");
+    	    	double st = arg0.getSession().getCreationTime();
+    	    	double addItemTime = arg0.getSession().getLastAccessedTime();
+    	    	double diff = (addItemTime - st)/MINISECOND_PER_SECOND;
+    	    	this.totalAddItmeTime = this.totalAddItmeTime + diff;
+    	    	double aveAddItemTime = this.totalAddItmeTime /this.totalCustomer;
+    	    	arg0.getSession().getServletContext().setAttribute("aveAddItemTime", aveAddItemTime);
+    	    	System.out.println( "total addItem time = " + this.totalAddItmeTime + "aveAddItemTime is : " + aveAddItemTime + "customer number : " +  this.totalCustomer );
+    	    	}
+    		 	
     }
 	
 }

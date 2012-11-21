@@ -45,6 +45,16 @@ public class ShoppingCart extends HttpServlet {
 				if (cart == null)
 				{	
 					cart = new ShoppingCartHelper();
+
+				}
+				if(session.getAttribute("newCart") == null)
+				{		
+				    session.setAttribute("newCart", "new"); // for listener
+				    System.out.println("inside shoppingCart newCart if");
+				}else
+				{
+					session.setAttribute("newCart", "old"); // for listener
+				    System.out.println("inside shoppingCart newCart else");
 				}
 				try 
 				{
