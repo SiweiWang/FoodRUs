@@ -132,6 +132,7 @@ public class FRUModel {
     		shoppingCart.add(item);
     		System.out.println(shoppingCart.getItems().contains(item));
     	}
+    	shoppingCart.checkOutUpdate();
     }
     
     /**
