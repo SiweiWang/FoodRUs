@@ -146,9 +146,16 @@ body {
 	text-align: left;
 }
 
-#total {
+#totalList {
 	text-align: right;
 	padding-right: 20px;
+	width: 200px;
+	float:right;
+}
+
+#grandTotal {
+	padding-top: 5px;
+	border-top: 1px solid black;
 }
 
 .qtyInput {

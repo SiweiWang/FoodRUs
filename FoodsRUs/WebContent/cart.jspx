@@ -17,15 +17,15 @@ version="2.0">
 <body>
 	<div id="main">
 		<jsp:include page="header.jspx"/>
-		
+		<form action="FRU" onsubmit="return checkUpdate();">
 		<div id="shoppingCart">
 			<h>Shopping Cart</h>
 			<div id="shoppingCartBtns">
-				<form action="FRU">
+				
 					<input type="submit" id="update" name="update" value="Update"/>
 					<input type="submit" id="continue" name="continue" value="Continue"/>
 					<input type="submit" id="checkout" name="checkout" value="Checkout"/>
-				</form>
+				
 			</div>	
 			<table id="cartTable">
 				<td>Number</td>
@@ -47,9 +47,13 @@ version="2.0">
 	   			</c:forEach>
 	   		</table>
 		</div>
+		</form>
 		
-		<div id="total">
-			<p>TOTAL</p>
+		<div id="totalList">
+			<p>TOTAL:	${sessionScope.cart.total}</p>
+			<p>SHIPPING:	${sessionScope.cart.shipping}</p>
+			<p>HST(13%):	${sessionScope.cart.HST}</p>
+			<p id="grandTotal">GRAND-TOTAL: ${sessionScope.cart.grandTotal}</p>
 		</div>
 			
 		<jsp:include page="footer.jspx"/>
