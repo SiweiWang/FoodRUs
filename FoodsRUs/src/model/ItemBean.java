@@ -7,6 +7,7 @@ package model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
@@ -16,7 +17,8 @@ import util.*;
  * @author 
  *
  */
-@XmlType(name="items", propOrder = {"name", "price", "quantity", "extended"})
+@XmlRootElement(name="item")
+@XmlType(name="item", propOrder = {"name", "price", "quantity", "extended"})
 public class ItemBean {
 
 	public ItemBean() {

@@ -3,6 +3,7 @@
  */
 package B2B;
 import model.*;
+
 import java.io.File;
 import java.util.HashMap;
 
@@ -17,14 +18,14 @@ import javax.xml.transform.stream.StreamSource;
  */
 public class ProcureOrder {
 
-	private static HashMap<String,Integer> procurementOrder = null;
+	private static HashMap<String,Integer> procurementOrder = new HashMap<String, Integer>();;
 
 	
 	/**
 	 * 
 	 */
 	public ProcureOrder() {
-		ProcureOrder.procurementOrder = new HashMap<String, Integer>();
+		
 	}
 
 	/**
@@ -48,22 +49,23 @@ public class ProcureOrder {
 
 			          System.out.println(i.getAbsolutePath());
 						// Create the unmarshaller, this is the nifty little thing that will actually transform the XML back into an object
-			          JAXBContext context = JAXBContext.newInstance(OrderWrapper.class, ShoppingCartHelper.class, ItemBean.class);
+			          JAXBContext context = JAXBContext.newInstance(OrderWrapper.class);
 			          
 			          Unmarshaller unmarshaller = context.createUnmarshaller();
-			          StreamSource xml = new StreamSource(i);
-			   
+			  			   
 			          // Unmarshal the XML in the stringWriter back into an object
-			          OrderWrapper ow =  unmarshaller.unmarshal(xml, OrderWrapper.class).getValue();
-			          
-			          for (ItemBean item: ow.getShoppingCart().getItems())
+			          OrderWrapper ow =  (OrderWrapper) unmarshaller.unmarshal(i);
+			          System.out.println(ow);
+			          System.out.println(ow.getItems());
+			          System.out.println(ow.getItems().getItems());
+			          for (ItemBean item: ow.getItems().getItems())
 			          {
 			        	  produceOrder(item);
 			          }
-			          // Print out the contents of the JavaObject we just unmarshalled from the XML
-
-			               
-			}  
+			          // Print out the contents of the JavaObject we just unmarshalled from the XML			               
+			}
+			
+			System.out.println(procurementOrder);
 		}
 	}
 

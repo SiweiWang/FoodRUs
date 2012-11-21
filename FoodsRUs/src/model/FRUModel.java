@@ -176,7 +176,7 @@ public class FRUModel {
 		String today = new java.sql.Date(System.currentTimeMillis()).toString();
 		
 
-		OrderWrapper ow = new OrderWrapper(id, today, customer, shoppingCart);
+		OrderWrapper ow = new OrderWrapper(id, today, customer, new ItemSBean(shoppingCart.getItems()), shoppingCart.getTotal(), shoppingCart.getShipping(), shoppingCart.getHST(), shoppingCart.getGrandTotal());
 		Marshaller marshaller = jc.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
