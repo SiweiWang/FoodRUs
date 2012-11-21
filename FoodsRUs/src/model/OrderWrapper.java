@@ -1,12 +1,16 @@
 package model;
 
 
+import java.util.Collection;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 
 @XmlRootElement(name="order")
+@XmlType(propOrder = {"customer", "items", "total", "shipping", "HST", "grandTotal"} )
 public class OrderWrapper {
 
 	private int id;
@@ -15,7 +19,8 @@ public class OrderWrapper {
 	
 	private ClientBean customer;
 	
-	private ShoppingCartHelper shoppingCart;
+	private Collection<ItemBean> items;
+	//private ShoppingCartHelper shoppingCart;
 	
 	private double total;
 	
@@ -60,14 +65,14 @@ public class OrderWrapper {
 		this.customer = customer;
 	}
 
-	@XmlElement(name="items")
-	public ShoppingCartHelper getShoppingCart() {
-		return shoppingCart;
+	@XmlElement
+	public Collection<ItemBean>  getItems() {
+		return items;
 	}
 
 
-	public void setShoppingCart(ShoppingCartHelper shoppingCart) {
-		this.shoppingCart = shoppingCart;
+	public void setItems(Collection<ItemBean> items) {
+		this.items = items;
 	}
 
 	@XmlElement
@@ -115,19 +120,26 @@ public class OrderWrapper {
 	 * @param id
 	 * @param submitted
 	 * @param customer
-	 * @param shoppingCart
+	 * @param items
+	 * @param total
+	 * @param shipping
+	 * @param hST
+	 * @param grandTotal
 	 */
 	public OrderWrapper(int id, String submitted, ClientBean customer,
-			ShoppingCartHelper shoppingCart) {
+			Collection<ItemBean> items, double total, double shipping, double hST,
+			double grandTotal) {
 		this.id = id;
 		this.submitted = submitted;
 		this.customer = customer;
-		this.shoppingCart = shoppingCart;
-		this.total = this.shoppingCart.getTotal();
-		this.shipping = this.shoppingCart.getShipping();
-		this.HST = this.shoppingCart.getHST();
-		this.grandTotal = this.shoppingCart.getGrandTotal();
+		this.items = items;
+		this.total = total;
+		this.shipping = shipping;
+		HST = hST;
+		this.grandTotal = grandTotal;
 	}
+	
+	
 	
 	
 
