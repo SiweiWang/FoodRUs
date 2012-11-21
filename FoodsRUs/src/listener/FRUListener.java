@@ -110,7 +110,6 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
 		this.bag = (HashMap<String, Integer>) se.getSession().getServletContext().getAttribute("map");
     	this.bag.put(id, 1);
     	se.getSession().getServletContext().setAttribute("map", this.bag);
-    	//System.out.println("max idel time : " + se.getSession().getMaxInactiveInterval());
         this.viewer= this.viewer +1;
         se.getSession().getServletContext().setAttribute("viewer", viewer);
     }
@@ -131,7 +130,7 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
 		this.bag = (HashMap<String, Integer>) se.getSession().getServletContext().getAttribute("map");
     	this.bag.remove(id);
     	se.getSession().getServletContext().setAttribute("map", this.bag);
-    	System.out.println("session is destoried");
+
     	
     }
 
@@ -163,15 +162,12 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
              totalCheckOutTime = totalCheckOutTime + diffTime;
     	    ave_fresh_checkout = totalCheckOutTime /totalCustomer;
     	    this.totalCustomer = this.totalCustomer +1;
-    	  //  System.out.println("the custome num: " + totalCustomer + "the ave time1 is: " + ave_fresh_checkout);
     	    
     	    arg0.getSession().getServletContext().setAttribute("ave_fresh_checkout", ave_fresh_checkout);
-    	   // System.out.println("the ave_checkout time is: " + ave_fresh_checkout);
     		}
     	}
     	    if(arg0.getSession().getAttribute("newCart") != null && arg0.getSession().getAttribute("newCart").equals("new"))
     	    {
-			   // System.out.println("inside lisener the newCart is :" + arg0.getSession().getAttribute("newCart") );
     	    	arg0.getSession().setAttribute("newCart", "old");
     	    	double st = arg0.getSession().getCreationTime();
     	    	double addItemTime = arg0.getSession().getLastAccessedTime();
@@ -179,7 +175,6 @@ public class FRUListener implements HttpSessionListener, HttpSessionAttributeLis
     	    	this.totalAddItmeTime = this.totalAddItmeTime + diff;
     	    	double aveAddItemTime = this.totalAddItmeTime /this.totalCustomer;
     	    	arg0.getSession().getServletContext().setAttribute("aveAddItemTime", aveAddItemTime);
-    	    	//System.out.println( "total addItem time = " + this.totalAddItmeTime + "aveAddItemTime is : " + aveAddItemTime + "customer number : " +  this.totalCustomer );
     	    	}
     		 	
     }
