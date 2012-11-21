@@ -16,23 +16,40 @@ version="2.0">
 </head>
 <body>
 	<div id="main">
-		
 		<jsp:include page="header.jspx"/>
 		
-		<div id="leftColumn">
-		<p>leftColumn</p>
+		<div id="shoppingCart">
+			<h>Shopping Cart</h>
+			<div id="shoppingCartBtns">
+				<form action="FRU">
+					<input type="submit" id="update" name="update" value="Update"/>
+					<input type="submit" id="continue" name="continue" value="Continue"/>
+					<input type="submit" id="checkout" name="checkout" value="Checkout"/>
+				</form>
+			</div>	
+			<table id="cartTable">
+				<td>Number</td>
+				<td>Name</td>
+				<td>Price</td>
+				<td>Extended Price</td>
+				<td>Quantity</td>
+				
+				<c:forEach var="item" items="${sessionScope.cart.items}">
+	        		<tr>
+					<td>${item.itemNumber}</td>
+					<td>${item.name}</td>
+					<td><f:formatNumber value="${item.price}" type="currency"/></td>
+					<td><f:formatNumber value="${item.extended}" type="currency"/></td>
+					<td>
+						<input class='qtyInput' type='text' id ='qtyToAdd' name='qtyToAdd' value='${item.quantity}'/>
+					</td>
+					</tr>	
+	   			</c:forEach>
+	   		</table>
 		</div>
 		
-		<div id="rightColumn">
-			<c:forEach var="item" items="${sessionScope.cart.items}">
-        		<span class="categoryBox">
-		                <div class="categoryLabelText">${item.itemNumber}</div>
-		                <div class="categoryLabelText">${item.name}</div>
-		                <div class="categoryLabelText">${item.price}</div>
-		              	<div class="categoryLabelText">${item.quantity}</div>
-		                
-        		</span>
-        	</c:forEach>
+		<div id="total">
+			<p>TOTAL</p>
 		</div>
 			
 		<jsp:include page="footer.jspx"/>

@@ -41,7 +41,7 @@
 	        		<tr>
 					<td>${item.itemNumber}</td>
 					<td>${item.name}</td>
-					<td>${item.price}</td>
+					<td><f:formatNumber value="${item.price}" type="currency"/></td>
 					<td>
 						<form action="ShoppingCart" method="POST" onsubmit="return checkQty(this);">
 							<input type="hidden" id="itemToAdd" name="itemToAdd" value="${item.itemNumber}"/>
