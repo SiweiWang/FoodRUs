@@ -23,9 +23,8 @@ import model.ShoppingCartHelper;
  * Servlet Filter implementation class Ads
  */
 @WebFilter(dispatcherTypes =
-{ DispatcherType.REQUEST, DispatcherType.FORWARD }, urlPatterns =
-{ "/cart.jspx" }, servletNames =
-{ "/cart.jspx" }, initParams =
+{DispatcherType.FORWARD }, urlPatterns =
+{ "/cart.jspx" },  initParams =
 { @WebInitParam(name = "baseItem", value = "1409S413"),
 		@WebInitParam(name = "adItem", value = "2002H712") })
 public class AdsFilter implements Filter
