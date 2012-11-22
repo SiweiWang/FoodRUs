@@ -18,7 +18,7 @@ import javax.xml.transform.stream.StreamSource;
  */
 public class ProcureOrder {
 
-	private static HashMap<String,Integer> procurementOrder = new HashMap<String, Integer>();;
+	private static HashMap<String,ItemBean> procurementOrder = new HashMap<String, ItemBean>();;
 
 	
 	/**
@@ -55,15 +55,15 @@ public class ProcureOrder {
 			  			   
 			          // Unmarshal the XML in the stringWriter back into an object
 			          OrderWrapper ow =  (OrderWrapper) unmarshaller.unmarshal(i);
-			          System.out.println(ow);
-			          System.out.println(ow.getItems());
-			          System.out.println(ow.getItems().getItems());
+
 			          for (ItemBean item: ow.getItems().getItems())
 			          {
 			        	  produceOrder(item);
 			          }
 			          // Print out the contents of the JavaObject we just unmarshalled from the XML			               
 			}
+			
+			WebServiceClient.order(procurementOrder.values());
 			
 			System.out.println(procurementOrder);
 		}
@@ -79,12 +79,13 @@ public class ProcureOrder {
 		String itemNumber = item.getItemNumber();
 		if (ProcureOrder.procurementOrder.containsKey(itemNumber))// the map already has the item
 		{
-			int count = ProcureOrder.procurementOrder.get(itemNumber) + item.getQuantity();
-			ProcureOrder.procurementOrder.put(itemNumber, count);
+			ItemBean it = ProcureOrder.procurementOrder.get(itemNumber);
+			int qty = it.getQuantity() + item.getQuantity();
+			it.setQuantity(qty);
 		}else //the map does not have the item
 		{
 			
-			ProcureOrder.procurementOrder.put(itemNumber, item.getQuantity());
+			ProcureOrder.procurementOrder.put(itemNumber, item);
 		}
 		
 	}

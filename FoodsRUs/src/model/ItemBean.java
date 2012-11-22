@@ -51,7 +51,7 @@ public class ItemBean {
 
 	private double cost;
 
-	private int supID;
+	private String supID;
 		
 	/**
 	 * @param itemNumber
@@ -173,7 +173,7 @@ public class ItemBean {
 	 * @return the supID
 	 */
 	@XmlTransient
-	public int getSupID()
+	public String getSupID()
 	{
 		return supID;
 	}
@@ -181,7 +181,7 @@ public class ItemBean {
 	/**
 	 * @param supID the supID to set
 	 */
-	public void setSupID(int supID)
+	public void setSupID(String supID)
 	{
 		this.supID = supID;
 	}
