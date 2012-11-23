@@ -28,7 +28,7 @@ function checkUpdate()
 		{
 			alert("The quantity for one of the items is negative!");
 			return false;
-		}else if (isNaN(q[i]))
+		}else if (isNaN(q[i].value))
 		{
 			alert("The quantity you specified is not a valid number!");
 			return false;
