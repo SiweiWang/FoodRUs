@@ -3,7 +3,7 @@
 	<xsl:template match="/">
 		<!-- TODO: Auto-generated template -->
 		<html>
-		<head>
+		<head>	
 			<title>Your Oder</title>
 		</head>
 		<body>
@@ -17,11 +17,11 @@
 		Customer Name: <xsl:value-of select="./customer/name"/><br/>
 		</div><br/>
 		<table>
-		<th>Number</th>
-		<th>Name</th>
-		<th>Price</th>
-		<th>Quantiry</th>
-		<th>Extended</th>
+		<th width='70px'>Number</th>
+		<th width='180px'>Name</th>
+		<th width='30px'>Price</th>
+		<th width='30px'>Quantiry</th>
+		<th width='30px'>Extended</th>
 		<xsl:for-each select="items/item">
 			<tr>
 			<td>
