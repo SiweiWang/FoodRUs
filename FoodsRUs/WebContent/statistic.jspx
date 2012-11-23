@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="GB18030" ?>
+<?xml version="1.0" encoding="ISO-8859-1" ?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" 
           xmlns:c="http://java.sun.com/jsp/jstl/core"
           xmlns:f="http://java.sun.com/jsp/jstl/fmt"
           version="2.0">
-	<jsp:directive.page contentType="text/html; charset=GB18030" 
-		pageEncoding="GB18030" session="true"/>
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1" 
+		pageEncoding="ISO-8859-1" session="true"/>
 	<jsp:output doctype-root-element="html"
 		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
 		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
@@ -12,40 +12,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
-<title>website statistic</title>
+<title>Website Analytics</title>
 </head>
 <body>
-           <jsp:include page="header.jspx"/>
-       <div>
-           <BR />
-           <BR />
-           <BR />
-           <table id="statistic" align="center" border = "1">
-                <caption>Statistic of The Website</caption>
+	<jsp:include page="header.jspx"/>
+      	<div id="analytics">
+      		<h>Website Analytics</h>
+			<table id="analyticsTable">
                 <tr>
-				<td>Average Add Item Time</td>
-				<td>Average Checkout Time</td>
-				<td>Total Active Sessions</td>
-				<td>Total viewers </td>
+					<td>Average Add Item Time</td>
+					<td>Average Checkout Time</td>
+					<td>Total Active Sessions</td>
+					<td>Total viewers </td>
 				</tr>
-	        		<tr>
-	        		<td><f:formatNumber type="currency">${aveAddItemTime}</f:formatNumber> second</td>
-					<td><f:formatNumber type="currency"> ${ave_fresh_checkout}</f:formatNumber> second</td>
+        		<tr>
+	        		<td>${aveAddItemTime} sec</td>
+					<td>${ave_fresh_checkout} sec</td>
 					<td>${map.size()}</td>
 					<td>${viewer}</td>	
-									
-					</tr>	
+				</tr>	
 			</table>
 	    </div>
-	    <div>
-	    <BR />
-	    <BR />
-	    <BR />
-	    <BR />
-	    <BR />
-	    <BR />
-			<jsp:include page="footer.jspx"/>	
-		</div>		
+	<jsp:include page="footer.jspx"/>			
 </body>
 </html>
 </jsp:root>

@@ -76,7 +76,6 @@ body {
 }
 
 .categoryBox {
-	
 /*     margin: 21px 14px 6px; */
 /* 	height: 100px; */
 /* 	border:solid 1px #555; */
@@ -94,6 +93,11 @@ body {
     border:solid 1px #555;
 }
 
+.qtyInput {
+	width: 40px;
+	margin: 5px;
+}
+
 #itemtable {
 	width: 650px;
 	border: 1em;
@@ -107,12 +111,12 @@ body {
 	padding-bottom: 10px;
 }
 
-#itemtable form{
+#itemtable form, #cartTable form{
 	width: 150px;
 	text-align: left;
 }
 
-#shoppingCart h{
+#shoppingCart h, #analytics h{
 	font-size: x-large;
 	text-decoration: underline;
 }
@@ -127,23 +131,18 @@ body {
 	margin-left: 20px;
 }
 
-#cartTable {
+#cartTable, #analyticsTable{
 	padding-top: 20px;
 	width: 650px;
 	border: 1em;
 	margin: auto;
 }
 
-#cartTable td
+#cartTable td, #analyticsTable td
 {
 	border: 2px solid black;
 	padding-top: 10px;
 	padding-bottom: 10px;
-}
-
-#cartTable form{
-	width: 150px;
-	text-align: left;
 }
 
 #totalList {
@@ -156,11 +155,6 @@ body {
 #grandTotal {
 	padding-top: 5px;
 	border-top: 1px solid black;
-}
-
-.qtyInput {
-	width: 40px;
-	margin: 5px;
 }
 
 #footer {
