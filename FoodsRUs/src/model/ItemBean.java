@@ -45,9 +45,7 @@ public class ItemBean {
 
 	private int catID;
 
-	private int onOrder;
-
-	private int reOrder;
+	private String orderConfirm;
 
 	private double cost;
 
@@ -186,6 +184,20 @@ public class ItemBean {
 		this.supID = supID;
 	}
 
-	
+	/**
+	 * @return the orderConfirm
+	 */
+	@XmlTransient
+	public String getOrderConfirm() {
+		return orderConfirm;
+	}
+
+	/**
+	 * @param orderConfirm the orderConfirm to set
+	 */
+	public void setOrderConfirm(String orderConfirm) {
+		this.orderConfirm = orderConfirm;
+	}
+
 
 }
