@@ -11,6 +11,10 @@ function checkQty(form)
 	{
 		alert("You're trying to add a negative quantity!");
 		ok = false;
+	}else if (isNaN(qtyToAdd))
+	{
+		alert("The quantity you specified is not a valid number!");
+		ok = false;
 	}
 	return ok;
 }
@@ -23,6 +27,10 @@ function checkUpdate()
 		if (q[i].value < 0)
 		{
 			alert("The quantity for one of the items is negative!");
+			return false;
+		}else if (isNaN(q[i]))
+		{
+			alert("The quantity you specified is not a valid number!");
 			return false;
 		}
 	}
